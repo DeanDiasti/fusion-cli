@@ -7,6 +7,10 @@ A typed command-line interface for **Autodesk Fusion**, with **CadBot**, an opti
 Codex-powered chat assistant inside Fusion. Build parametric parts, edit assemblies,
 preview joint motion, and inspect interference through validated commands.
 
+[Website and installation guide](https://deandiasti.github.io/fusion-cli/) ·
+[Homebrew tap](https://github.com/DeanDiasti/homebrew-tap) ·
+[Command reference](https://deandiasti.github.io/fusion-cli/commands/)
+
 The Python add-in runs CAD operations on Fusion's main thread. A separate Python
 worker handles the AI conversation. Both chat and terminal clients use the same
 finite command catalog and authenticated localhost bridge.
@@ -45,7 +49,25 @@ are not validated. Fusion's bundled Python loads the add-in; your virtual enviro
 runs the external worker. This repository does not include Fusion, its API binaries,
 or the Codex runtime.
 
-## Quick start on macOS
+## Install on macOS
+
+### Homebrew
+
+```bash
+brew install DeanDiasti/tap/fusion-cli
+fusion-install-addin
+```
+
+The dedicated tap installs the CLI and an isolated Python environment with pinned,
+checksummed dependencies. Autodesk Fusion must be installed separately. This is a
+community tap, not a Homebrew core package. `fusion-install-addin` preserves an
+existing bridge token and backs up the previous add-in.
+
+Save work and stop CadBot before `brew upgrade DeanDiasti/tap/fusion-cli`, then run
+`fusion-install-addin` again and restart Fusion. Homebrew upgrades do not modify
+the running add-in automatically. See [distribution details](docs/distribution.md).
+
+### Source checkout
 
 ```bash
 git clone https://github.com/DeanDiasti/fusion-cli.git
@@ -68,6 +90,7 @@ place, and reinstall after moving them or changing source files.
 ```
 
 Help works without Fusion. `doctor` checks credentials and the exact installed build.
+Homebrew users run `fusion` in place of `./scripts/fusion` in these examples.
 Read-only commands work from the terminal once the add-in is running. **Design edits
 and motion previews require an active CadBot message checkpoint**; independent
 terminal mutations are rejected. Use the Fusion chat as the normal modeling entry

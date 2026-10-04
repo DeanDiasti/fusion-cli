@@ -58,6 +58,7 @@
     "requirements.txt": "d8f15e39e390d38c94f0090584e24afb9a2b3542881309562664b9c60d59f768",
     "scripts/check_public.py": "50ad2a21bbbc6a36d48bf8367a0a08a705ea9f3dc14e7595a106a74f62e08216",
     "scripts/check_release.py": "287b44aabd3ef0a72673cf74953916967f671f19c7623c594d27977db472dec4",
+    "scripts/check_site.py": "13c71596f4e971a7fd63b319cefa4abf28af2cf1f0fbb956417ba9abcb5d8e6a",
     "scripts/cli_coverage.py": "33d6df67e1db8e3f2c137b3cbc0c89d8a48390754daba6dc7d6ec3ec1d699834",
     "scripts/fusion": "300b67e54e244050e1f8e39b5d156cf30aa3833793c2c2bd159f90ca02f9ecb6",
     "scripts/install_addin.py": "a1f184337af93ce34fc9f6a6122609a5514c4c14c63abef37f2378fe51fa38a8",

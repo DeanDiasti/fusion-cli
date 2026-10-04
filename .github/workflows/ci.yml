@@ -49,3 +49,5 @@ jobs:
         run: |
           python agent/fusion_cli.py help
           python agent/fusion_cli.py design motion inspect --help
+      - name: Documentation links and search metadata
+        run: python scripts/check_site.py
