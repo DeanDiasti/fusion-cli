@@ -15,7 +15,7 @@ from pathlib import Path
 
 
 URL = os.environ.get("CADBOT_BRIDGE_URL", "http://localhost:8765")
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'agent'))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'cli'))
 from bridge_cli import TOKEN
 REPORT = Path("/tmp/cadbot-design-expanded-http.json")
 rows = []

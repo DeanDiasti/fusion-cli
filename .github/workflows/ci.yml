@@ -33,21 +33,18 @@ jobs:
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: '24'
-      - name: Install pinned SDK
-        run: python -m pip install -r requirements.txt
       - name: Publication guard
         # The native F3D fixture uses ZIP Zstandard, supported by Python 3.14.
         if: matrix.python == '3.14'
         run: python scripts/check_public.py
       - name: Python host tests (no Fusion or account)
-        run: python -m unittest discover -s tests -p 'test_*.py'
-      - name: Palette and motion-player tests
+        run: python -S -m unittest discover -s tests -p 'test_*.py'
+      - name: Motion-player tests
         run: |
-          node tests/test_palette.cjs
           node tests/test_motion_player.cjs
       - name: Offline command help
         run: |
-          python agent/fusion_cli.py help
-          python agent/fusion_cli.py design motion inspect --help
+          python -S cli/fusion_cli.py help
+          python -S cli/fusion_cli.py design motion inspect --help
       - name: Documentation links and search metadata
         run: python scripts/check_site.py

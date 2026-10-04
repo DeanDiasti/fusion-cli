@@ -49,6 +49,12 @@ def strict_json(value):
 EASING = ('linear', 'ease-in', 'ease-out', 'ease-in-out', 'step')
 
 
+def checkpoint_id(value):
+    if not isinstance(value, str) or not 1 <= len(value) <= 128 or value != value.strip() or not value.isprintable():
+        raise ValueError('Use a printable checkpoint ID of 1–128 characters, without surrounding whitespace.')
+    return value
+
+
 def validate_tracks(tracks):
     if not isinstance(tracks, list) or not 1 <= len(tracks) <= 24:
         raise ValueError('Provide 1–24 tracks.')
@@ -97,6 +103,10 @@ def validate_entities(entities):
 # command: (handler, mutates design, required options, optional options)
 # Option names are converted from underscores to hyphens in the CLI.
 SPECS = {
+ 'checkpoint begin': ('checkpoint_begin',False,{'id':checkpoint_id},{'document_id':str}),
+ 'checkpoint finish': ('checkpoint_finish',False,{},{}),
+ 'checkpoint status': ('checkpoint_status',False,{},{}),
+ 'checkpoint restore': ('checkpoint_restore',False,{'id':checkpoint_id},{'document_id':str}),
  'assembly instances': ('assembly_instances',False,{},{}),
  'joints list': ('list_joints',False,{},{}),
  'joints drive': ('drive_joint',True,{'joint':str,'axis':('rotation','slide'),'value':number},{}),
@@ -142,10 +152,10 @@ SPECS = {
 
 
 # Canonical workspace-scoped grammar. Compatibility aliases are resolved before
-# parsing; they never add duplicate tools to the model context.
+# parsing; they never add duplicate canonical commands.
 ALIASES = {}
 for _old in list(SPECS):
-    if _old.startswith('design '):
+    if _old.startswith(('design ', 'checkpoint ')):
         continue
     _new = ('design motion ' + _old.split(' ', 1)[1]
             if _old.startswith('animation ') else 'design ' + _old)
@@ -483,7 +493,9 @@ SPECS.update({
 
 EFFECTS = {name: ('design_mutation' if spec[1] else 'inspection') for name, spec in SPECS.items()}
 for _name in SPECS:
-    if _name == 'documents export' or _name == 'files download':
+    if _name.startswith('checkpoint '):
+        EFFECTS[_name] = 'checkpoint_control'
+    elif _name == 'documents export' or _name == 'files download':
         EFFECTS[_name] = 'file_output'
     elif _name.startswith(('projects ', 'folders ', 'files ')) and _name.split()[-1] not in ('list','inspect','search'):
         EFFECTS[_name] = 'cloud_mutation'
@@ -531,6 +543,10 @@ class Parser(argparse.ArgumentParser):
 
 def parser(command):
     details = {
+        'checkpoint begin': 'Start a named Design checkpoint before editing. IDs must be unique in the current verified session. Optional document-id prevents editing the wrong active design.',
+        'checkpoint finish': 'Finish the active checkpoint. Finish before restoring; this does not undo its changes.',
+        'checkpoint status': 'List available session checkpoints and the active ID. Reloading the bridge or external edits invalidate restoration.',
+        'checkpoint restore': 'Restore the Design to before this checkpoint, undoing its transactions and all later checkpoints. Requires a finished, verified chain; no selective undo or redo.',
         'design sketches offset': 'Offset 1–100 end-connected curve tokens in flow order with signed distance-mm. Positive is right of flow (outside for circles); negative is left. Creates a parametric topology-matched offset.',
         'design sketches trim': 'Remove the segment nearest x-mm,y-mm in sketch coordinates. Without intersections the entire curve is deleted. Fixed/linked curves are refused. Refresh geometry and profiles after trimming.',
         'design interference check': 'Analyze 2–32 root solid body names/tokens or occurrence:<full path> selectors. Use assembly instances to discover paths. At most 100 body instances; overlapping selections are refused. Coincident faces are excluded.',

@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a reproducible CLI, chat, or CAD behavior problem.
+description: Report a reproducible CLI or CAD behavior problem.
 title: "[Bug]: "
 body:
   - type: markdown
@@ -23,7 +23,7 @@ body:
     id: reproduce
     attributes:
       label: Steps to reproduce
-      description: Include the command or chat request and minimal synthetic fixture.
+      description: Include the command and minimal synthetic fixture.
     validations:
       required: true
   - type: textarea

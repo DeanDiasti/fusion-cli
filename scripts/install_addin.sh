@@ -2,8 +2,7 @@
 set -eu
 CADBOT_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 if [ ! -x "$CADBOT_ROOT/.venv/bin/python" ]; then
-  echo "Missing .venv. Create it and install requirements.txt before installing CadBot." >&2
+  echo "Missing .venv. Create it with python3 -m venv .venv before installing the CLI bridge." >&2
   exit 1
 fi
-"$CADBOT_ROOT/.venv/bin/python" -c 'import openai_codex'
 exec "$CADBOT_ROOT/.venv/bin/python" "$CADBOT_ROOT/scripts/install_addin.py" "$@"

@@ -17,7 +17,7 @@ import hmac
 from .build import BUILD, PROTOCOL
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-VERSION = "0.5.0"
+VERSION = "0.6.0"
 # Shared secret so random local processes can't drive Fusion.
 # Overridable via CADBOT_BRIDGE_TOKEN; both sides must match.
 TOKEN_FILE = os.path.join(
@@ -39,7 +39,10 @@ def _checkpoint(args):
     required = {'action', 'id'} if action in ('begin', 'restore') else {'action'}
     if (action not in ('begin', 'finish', 'status', 'restore') or set(args) != required
             or ('id' in args and (not isinstance(args['id'], str) or not args['id'].strip()))):
-        raise ValueError('Invalid checkpoint action or message ID.')
+        raise ValueError('Invalid checkpoint action or checkpoint ID.')
+    if 'id' in args:
+        from .commands import checkpoint_id
+        checkpoint_id(args['id'])
     from .fusion_undo import FusionUndo
     if _undo is None:
         _undo = FusionUndo()
@@ -66,7 +69,7 @@ def _execute_tool(name, fn, args):
         blocked = refusal(canonical)
         if blocked is not None:
             return blocked
-        if effect in ('design_mutation','temporary_preview'):
+        if effect in ('design_mutation','temporary_preview') or canonical in ('checkpoint begin','checkpoint restore'):
             import adsk.core
             workspace=adsk.core.Application.get().userInterface.activeWorkspace
             if workspace is None or workspace.id not in ('FusionSolidEnvironment','FusionSurfaceEnvironment',
@@ -84,7 +87,7 @@ def _execute_tool(name, fn, args):
             _undo.invalidate('A '+effect.replace('_',' ')+' is outside Design checkpoints.')
         if mutates:
             if _undo is None or _undo.ledger is None or not _undo.ledger.active:
-                raise RuntimeError('Editing commands require an active CadBot message checkpoint.')
+                raise RuntimeError('Editing commands require an active CLI checkpoint. Run fusion checkpoint begin --id <name> first.')
             if effect == 'temporary_preview':
                 from tools import motion
                 return _undo.preview(lambda a: motion.run_preview(target, a), data, motion.observe_axes)

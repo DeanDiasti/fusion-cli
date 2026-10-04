@@ -1,0 +1,184 @@
+{
+  "passed": true,
+  "failed_cut_rollback_verified": true,
+  "through_all_cut_and_parametric_resize_verified": true,
+  "participant_isolation_verified": true,
+  "moved_component_support_projection_and_cut_refusal_verified": true,
+  "linked_and_independent_projection_verified": true,
+  "native_undo_verified": true,
+  "original_context_restored": true,
+  "build": "eed1b12ce2969c86",
+  "transport": "native CLI with checkpoint transactions",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion design bodies topology list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches circles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true,
+      "outcome": "expected_error_with_verified_rollback"
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design parameters set",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies topology list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches circles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design parameters set",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies topology list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches circles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design parameters set",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies topology list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches circles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design parameters set",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies topology list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches project",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches profiles list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches circles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches project",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches project",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches circles edit",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches profiles list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches profiles list",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies topology list",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies topology list",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies topology list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches project",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": false,
+      "blocker_matched": true,
+      "outcome": "capability_blocked"
+    }
+  ],
+  "raw_report_sha256": "315f28fc426a3ca78b6eb630f644dc8b1ce26db2c8fb0a77388239578f743e2e"
+}

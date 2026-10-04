@@ -6,7 +6,7 @@ import test_startup
 test_startup.core.ApplicationCommandEventHandler = type('ApplicationCommandEventHandler', (), {})
 test_startup.core.DocumentEventHandler = type('DocumentEventHandler', (), {})
 from bridge.fusion_undo import FusionUndo, _timeline_signature, _timeline_signature_item
-from bridge.message_undo import MessageUndo, UndoUnavailable
+from bridge.checkpoint_undo import CheckpointUndo, UndoUnavailable
 
 
 class RecoveryTests(unittest.TestCase):
@@ -19,13 +19,12 @@ class RecoveryTests(unittest.TestCase):
             self.assertIs(owner.design(), product)
         owner.app.activeDocument.products.itemByProductType.assert_called_once_with('DesignProductType')
 
-    def test_begin_without_document_allows_chat_without_checkpoint(self):
+    def test_begin_without_document_refuses_checkpoint(self):
         owner = FusionUndo.__new__(FusionUndo)
         owner.app = Mock(activeDocument=None)
         owner.ledger = None
-        result = owner.begin('message')
-        self.assertFalse(result['active'])
-        self.assertEqual(result['available'], [])
+        with self.assertRaisesRegex(UndoUnavailable, 'Open a Fusion design'):
+            owner.begin('checkpoint')
         self.assertIsNone(owner.ledger)
 
     def test_timeline_signature_supports_group_without_entity(self):
@@ -79,8 +78,8 @@ class RecoveryTests(unittest.TestCase):
             if command == 'PTransaction.Commit' and commit_fails:
                 raise RuntimeError('commit failed')
         owner.text = Mock(side_effect=text)
-        owner.ledger = MessageUndo(owner)
-        owner.ledger.begin('message')
+        owner.ledger = CheckpointUndo(owner)
+        owner.ledger.begin('checkpoint')
         return owner
 
     def test_verified_abort_preserves_checkpoint_and_allows_retry(self):
@@ -90,8 +89,8 @@ class RecoveryTests(unittest.TestCase):
         self.assertIsNone(owner.ledger.reason)
         self.assertEqual(owner.execute(lambda args: {'ok': True}, {}), {'ok': True})
         owner.finish()
-        self.assertEqual(owner.status()['available'], ['message'])
-        self.assertEqual(len(owner.ledger.messages[0].transactions), 1)
+        self.assertEqual(owner.status()['available'], ['checkpoint'])
+        self.assertEqual(len(owner.ledger.checkpoints[0].transactions), 1)
 
     def test_unverified_abort_blocks_further_edits(self):
         for kwargs in ({'abort_fails': True}, {'changed': True}):

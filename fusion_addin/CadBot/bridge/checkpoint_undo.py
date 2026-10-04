@@ -1,4 +1,4 @@
-"""Session-only message undo ledger. No model-directed operations.
+"""Session-only checkpoint undo ledger. No unchecked native Undo operations.
 
 The host adapter must provide verified, committed transaction tokens. A tool
 call count is NOT a transaction token. This module intentionally cannot invoke
@@ -19,7 +19,7 @@ class UndoAdapter(Protocol):
 
 
 @dataclass
-class MessageBoundary:
+class CheckpointBoundary:
     id: str
     before: str
     after: str
@@ -28,11 +28,11 @@ class MessageBoundary:
     complete: bool = False
 
 
-class MessageUndo:
+class CheckpointUndo:
     def __init__(self, adapter: UndoAdapter):
         self.adapter = adapter
         self.document = adapter.document_id()
-        self.messages: list[MessageBoundary] = []
+        self.checkpoints: list[CheckpointBoundary] = []
         self.active = None
         self.reason = None
         self.restoring = False
@@ -47,23 +47,23 @@ class MessageUndo:
             self.invalidate('The active document changed.')
             raise UndoUnavailable(self.reason)
 
-    def begin(self, message_id):
+    def begin(self, checkpoint_id):
         self._check()
         if self.active or self.restoring:
             raise UndoUnavailable('An operation is already running.')
-        if any(m.id == message_id for m in self.messages):
-            raise ValueError('Duplicate message ID')
+        if any(m.id == checkpoint_id for m in self.checkpoints):
+            raise ValueError('Duplicate checkpoint ID')
         head = self.adapter.head()
-        if self.messages and head != self.messages[-1].after:
+        if self.checkpoints and head != self.checkpoints[-1].after:
             self.invalidate('The undo history changed outside CadBot.')
             raise UndoUnavailable(self.reason)
-        self.active = MessageBoundary(message_id, head, head)
-        self.messages.append(self.active)
+        self.active = CheckpointBoundary(checkpoint_id, head, head)
+        self.checkpoints.append(self.active)
 
     def committed(self, before, after):
         self._check()
         if not self.active:
-            raise UndoUnavailable('No active message.')
+            raise UndoUnavailable('No active checkpoint.')
         if before != self.active.after or self.adapter.head() != after:
             self.invalidate('The committed transaction boundary could not be verified.')
             raise UndoUnavailable(self.reason)
@@ -74,28 +74,28 @@ class MessageUndo:
     def finish(self):
         self._check()
         if not self.active:
-            raise UndoUnavailable('No active message.')
+            raise UndoUnavailable('No active checkpoint.')
         if self.adapter.head() != self.active.after:
             self.invalidate('The undo history changed outside CadBot.')
             raise UndoUnavailable(self.reason)
         self.active.complete = True
         self.active = None
 
-    def plan(self, message_id):
+    def plan(self, checkpoint_id):
         self._check()
         if self.active or self.restoring:
             raise UndoUnavailable('Finish or stop the current request first.')
-        index = next((i for i, m in enumerate(self.messages) if m.id == message_id), None)
+        index = next((i for i, m in enumerate(self.checkpoints) if m.id == checkpoint_id), None)
         if index is None:
             raise UndoUnavailable('Checkpoint is not available in this session.')
-        if self.adapter.head() != self.messages[-1].after:
+        if self.adapter.head() != self.checkpoints[-1].after:
             self.invalidate('The undo history changed outside CadBot.')
             raise UndoUnavailable(self.reason)
-        steps = [step for m in self.messages[index:] for step in m.transactions]
+        steps = [step for m in self.checkpoints[index:] for step in m.transactions]
         return index, list(reversed(steps))
 
-    def restore_before(self, message_id):
-        index, steps = self.plan(message_id)
+    def restore_before(self, checkpoint_id):
+        index, steps = self.plan(checkpoint_id)
         self.restoring = True
         undone = 0
         try:
@@ -107,11 +107,11 @@ class MessageUndo:
                 undone += 1
                 if self.adapter.head() != before:
                     raise UndoUnavailable('Fusion did not reach the expected undo boundary.')
-            if self.adapter.head() != self.messages[index].before:
-                raise UndoUnavailable('The target message boundary was not reached.')
-            restored = [m.id for m in self.messages[index:]]
-            self.messages = self.messages[:index]
-            return {'restored_before': message_id, 'messages_undone': restored,
+            if self.adapter.head() != self.checkpoints[index].before:
+                raise UndoUnavailable('The target checkpoint boundary was not reached.')
+            restored = [m.id for m in self.checkpoints[index:]]
+            self.checkpoints = self.checkpoints[:index]
+            return {'restored_before': checkpoint_id, 'checkpoints_undone': restored,
                     'transactions_undone': undone}
         except Exception as exc:
             self.invalidate('Restore interrupted after {} undo steps: {}'.format(undone, exc))

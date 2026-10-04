@@ -39,7 +39,7 @@ class MotionSpecTests(unittest.TestCase):
         self.assertEqual(len(commands.sample_times(tracks,61)),85)
 
     def test_real_offline_cli_loads_shared_validation(self):
-        p=subprocess.run([sys.executable,str(test_startup.ROOT/'agent/fusion_cli.py'),
+        p=subprocess.run([sys.executable,str(test_startup.ROOT/'cli/fusion_cli.py'),
             'design','motion','check','--tracks',json.dumps([self.track(easing='invalid')])],capture_output=True,text=True)
         self.assertEqual(p.returncode,2,p.stderr)
         self.assertIn('easing',p.stdout)
@@ -59,7 +59,7 @@ class MotionSpecTests(unittest.TestCase):
 
 
 class PreviewPollingTests(unittest.TestCase):
-    def test_palette_poll_during_capture_does_not_check_temporary_signature(self):
+    def test_status_during_capture_does_not_check_temporary_signature(self):
         from bridge.fusion_undo import FusionUndo
         owner=FusionUndo.__new__(FusionUndo)
         owner.ledger=NS(active=True,reason=None,_check=Mock())

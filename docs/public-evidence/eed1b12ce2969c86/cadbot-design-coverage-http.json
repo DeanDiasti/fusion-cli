@@ -1,0 +1,275 @@
+{
+  "original_model_touched": false,
+  "passed": true,
+  "build": "eed1b12ce2969c86",
+  "transport": "installed HTTP CLI dispatch",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion app inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion documents create",
+      "passed": true
+    },
+    {
+      "command": "fusion workspace activate",
+      "passed": true
+    },
+    {
+      "command": "fusion design inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design assembly instances",
+      "passed": true
+    },
+    {
+      "command": "fusion design components list",
+      "passed": true
+    },
+    {
+      "command": "fusion design components create",
+      "passed": true
+    },
+    {
+      "command": "fusion design components create",
+      "passed": true
+    },
+    {
+      "command": "fusion design components inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design components rename",
+      "passed": true
+    },
+    {
+      "command": "fusion design occurrences list",
+      "passed": true
+    },
+    {
+      "command": "fusion design occurrences create",
+      "passed": true
+    },
+    {
+      "command": "fusion design occurrences transform",
+      "passed": true
+    },
+    {
+      "command": "fusion design occurrences delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints create",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints list",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints edit",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints suppress",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints unsuppress",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints flip",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints unflip",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints drive",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design components delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design occurrences delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches lines add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches lines edit",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches geometry fixed",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches geometry fixed",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches dimension",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches dimensions list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches dimensions set",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches dimensions delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches geometry delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches line",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches circle",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches rectangles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches rectangles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies list",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies combine",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies list",
+      "passed": true
+    },
+    {
+      "command": "fusion design selection add",
+      "passed": true
+    },
+    {
+      "command": "fusion design selection list",
+      "passed": true
+    },
+    {
+      "command": "fusion design selection remove",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction list",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction planes create-angle",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction rename",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction axes create-two-planes",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline list",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline beginning",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline end",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline roll",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline end",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline groups list",
+      "passed": true
+    },
+    {
+      "command": "fusion design viewport screenshot",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies list",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design reset",
+      "passed": true
+    }
+  ],
+  "raw_report_sha256": "a941248ce6e6adbd2164f8a44bf5550df29f40b835ba60647d887fc4e16da864"
+}

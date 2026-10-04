@@ -1,5 +1,7 @@
 # CadBot CLI 0.4.0 release report
 
+Historical release notes. Current setup and CLI workflows are in [the CLI guide](cli-guide.md).
+
 Release build: `ae63c40b6456c132` · bridge protocol 3 · validated October 3, 2026
 on Autodesk Fusion 2705.1.15 (Education License), macOS, Python 3.14.
 

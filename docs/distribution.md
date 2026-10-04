@@ -22,17 +22,14 @@ fusion help
 ```
 
 Formula source: [DeanDiasti/homebrew-tap](https://github.com/DeanDiasti/homebrew-tap).
-It installs the source release, Python 3.14, and an isolated environment containing
-explicit, checksummed SDK dependencies. It does not install Autodesk Fusion,
-modify an open document, sign into Codex, or automatically replace the add-in.
-The tap packages upstream SDK wheels for Apple Silicon and Intel Macs; it is a
-third-party tap, not a Homebrew core submission. Core's dependency rules prohibit
-a formula from depending on proprietary software such as Fusion.
+It installs the source release and Python 3.14. The CLI has no third-party Python
+dependencies. The tap supports Apple Silicon and Intel Macs; it is a community
+tap. Autodesk Fusion must be installed separately.
 
 The `fusion` wrapper provides the same typed CLI as `scripts/fusion`.
 `fusion-install-addin` runs the existing transactional add-in installer using the
-Homebrew environment. Save work, restart Fusion, and run CadBot from Scripts and
-Add-Ins afterward. AI chat still requires Codex sign-in; offline help does not.
+Homebrew Python interpreter. Save work, restart Fusion, and run CadBot from Scripts and
+Add-Ins afterward. Offline help works without Fusion.
 
 Save work and stop CadBot before upgrading:
 
@@ -43,10 +40,10 @@ fusion-install-addin
 ```
 
 Run the add-in installer after every upgrade and before `brew cleanup` removes an
-old environment. A running worker can retain its old version until restarted.
+old environment. A running bridge retains its old version until restarted.
 `fusion doctor` detects a different loaded CAD build. Uninstalling the formula does
 not remove the separately installed add-in, bridge credentials, backup files, or
-saved conversations. Stop/remove CadBot through Fusion if you no longer need it.
+legacy user data. Stop/remove CadBot through Fusion if you no longer need it.
 
 ## Release maintenance
 
@@ -56,9 +53,7 @@ saved conversations. Stop/remove CadBot through Fusion if you no longer need it.
 2. Create an immutable version tag and GitHub release for the verified source.
 3. Download that tag's source archive, compute SHA-256, and update the tap's formula
    URL/version/checksum. Do not move an already published release tag.
-4. Resolve every Python dependency and its architecture-specific wheels to exact
-   versions, URLs, and SHA-256 checksums. Review upstream compatibility and licenses.
-   Do not enable unconstrained pip dependency downloads during formula installation.
+4. Keep the standard-library-only runtime free of unconstrained dependency downloads.
 5. Run `brew install --build-from-source DeanDiasti/tap/fusion-cli` and `brew test
    DeanDiasti/tap/fusion-cli`; check isolated add-in installation using a temporary
    destination. Tap CI runs on macOS and does not need a Fusion account.

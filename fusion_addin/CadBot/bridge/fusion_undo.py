@@ -8,7 +8,7 @@ import json
 import uuid
 import adsk.core
 import adsk.fusion
-from .message_undo import MessageUndo, UndoUnavailable
+from .checkpoint_undo import CheckpointUndo, UndoUnavailable
 
 
 def _timeline_signature_item(item):
@@ -106,32 +106,34 @@ class FusionUndo:
         if self.ledger:
             self.ledger.invalidate(reason)
 
-    def begin(self, message_id):
+    def begin(self, checkpoint_id):
         try:
             self.design()
         except UndoUnavailable as exc:
             self.invalidate(str(exc))
-            return {'available': [], 'active': False, 'reason': str(exc)}
+            raise
         # New work may establish a fresh chain after an invalidation.
         if self.ledger is None or self.ledger.reason or self.document_id() != self.ledger.document:
             self.signatures = {self.marker(): self.signature()}
-            self.ledger = MessageUndo(self)
-        self.ledger.begin(message_id)
+            self.ledger = CheckpointUndo(self)
+        self.ledger.begin(checkpoint_id)
         return self.status()
 
     def finish(self):
         if self.ledger and self.ledger.active:
             if self.ledger.reason:
                 self.ledger.active = None
+                raise UndoUnavailable(self.ledger.reason)
             else:
                 self.ledger.finish()
         return self.status()
 
     def status(self):
         if not self.ledger:
-            return {'available': [], 'reason': 'No checkpoints in this Fusion session.'}
+            return {'available': [], 'reason': 'No checkpoints in this Fusion session.',
+                    'active': False, 'active_id': None}
         if self.owned:
-            # Viewport capture can pump the palette's poll callback. A temporary
+            # Viewport capture can pump another status callback. A temporary
             # pose intentionally differs from the committed signature until the
             # transaction aborts; observing it must not invalidate the ledger.
             return {'available': [], 'reason': self.ledger.reason,
@@ -141,8 +143,9 @@ class FusionUndo:
             self.head()
         except Exception as exc:
             self.invalidate(str(exc))
-        return {'available': [] if self.ledger.reason or self.ledger.active else [m.id for m in self.ledger.messages],
-                'reason': self.ledger.reason, 'active': bool(self.ledger.active)}
+        return {'available': [] if self.ledger.reason or self.ledger.active else [m.id for m in self.ledger.checkpoints],
+                'reason': self.ledger.reason, 'active': bool(self.ledger.active),
+                'active_id': self.ledger.active.id if self.ledger.active else None}
 
     def text(self, command):
         result = self.app.executeTextCommand(command)
@@ -152,17 +155,16 @@ class FusionUndo:
 
     def execute(self, fn, args):
         if self.ledger and self.ledger.active and self.ledger.reason:
-            raise UndoUnavailable(self.ledger.reason + ' Send a new message to continue.')
+            raise UndoUnavailable(self.ledger.reason + ' Finish the invalid checkpoint and begin a new one to continue.')
         if not self.ledger or not self.ledger.active:
-            self.invalidate('A model edit was not associated with a tracked message.')
-            return fn(args)
+            raise UndoUnavailable('Begin a CLI checkpoint before editing.')
         before = self.head()
         token = str(uuid.uuid4())
         self.owned = True
         started = False
         committing = False
         try:
-            self.text('PTransaction.Start CadBotMessageEdit')
+            self.text('PTransaction.Start CadBotCliEdit')
             started = True
             result = fn(args)
             self.design().attributes.add('CadBotUndo', 'head', token)
@@ -186,8 +188,8 @@ class FusionUndo:
                     pass
             if not recovered:
                 self.invalidate('A transaction failed and rollback could not be verified; earlier design checkpoints are unavailable.')
-            # Preserve the original tool error so the model can correct its
-            # arguments and retry within this message after verified rollback.
+            # Preserve the original tool error so the caller can correct its
+            # arguments and retry within this checkpoint after verified rollback.
             raise
         finally:
             self.owned = False
@@ -195,7 +197,7 @@ class FusionUndo:
     def preview(self, fn, args, observe):
         """Always abort transient motion, then verify before exposing its result."""
         if not self.ledger or not self.ledger.active:
-            raise UndoUnavailable('Preview requires an active message checkpoint.')
+            raise UndoUnavailable('Preview requires an active CLI checkpoint.')
         self.ledger._check()
         before = self.head()
         signature = self.signature()
@@ -238,10 +240,10 @@ class FusionUndo:
         finally:
             self.owned = False
 
-    def restore(self, message_id):
+    def restore(self, checkpoint_id):
         if not self.ledger:
             raise UndoUnavailable('This checkpoint belongs to an earlier Fusion session.')
-        return self.ledger.restore_before(message_id)
+        return self.ledger.restore_before(checkpoint_id)
 
 
 class _ExternalCommand(adsk.core.ApplicationCommandEventHandler):

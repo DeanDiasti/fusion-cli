@@ -2,7 +2,7 @@
 """Run local release checks and verify durable evidence for the exact source tree.
 
 This does not operate Fusion or create cloud fixtures. Use --runtime to also
-check that the running add-in matches. See docs/release-0.5.0.md for live gates.
+check that the running add-in matches. See docs/release-0.6.0.md for live gates.
 """
 import argparse
 import hashlib
@@ -17,13 +17,12 @@ from public_files import is_public_path
 
 def source_hashes():
     paths = []
-    for directory in ('agent', 'fusion_addin/CadBot', 'scripts', 'tests'):
+    for directory in ('cli', 'fusion_addin/CadBot', 'scripts', 'tests'):
         paths.extend(p for p in (ROOT / directory).rglob('*') if p.is_file()
                      and '__pycache__' not in p.parts and not p.name.startswith('.')
                      and p.suffix not in ('.pyc', '.log')
                      and p.name not in ('coverage.json', 'runtime_config.json')
                      and is_public_path(p.relative_to(ROOT)))
-    paths.append(ROOT / 'requirements.txt')
     return {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
             for p in sorted(paths)}
 
@@ -62,10 +61,9 @@ def main():
     try:
         report = verify_evidence(directory)
         subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_*.py'], cwd=ROOT, check=True)
-        subprocess.run(['node', 'tests/test_palette.cjs'], cwd=ROOT, check=True)
         subprocess.run(['node', 'tests/test_motion_player.cjs'], cwd=ROOT, check=True)
         if args.runtime:
-            subprocess.run([sys.executable, 'agent/fusion_cli.py', 'doctor'], cwd=ROOT, check=True)
+            subprocess.run([sys.executable, 'cli/fusion_cli.py', 'doctor'], cwd=ROOT, check=True)
     except (OSError, ValueError, KeyError, subprocess.CalledProcessError) as exc:
         print('Release check failed: ' + str(exc), file=sys.stderr)
         return 1

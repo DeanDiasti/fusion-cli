@@ -1,0 +1,101 @@
+{
+  "passed": true,
+  "original_model_touched": false,
+  "geometry_verified": true,
+  "undo_verified": true,
+  "guards_verified": true,
+  "fixture_closed": true,
+  "original_document_restored": true,
+  "original_workspace_restored": true,
+  "build": "eed1b12ce2969c86",
+  "transport": "installed HTTP CLI dispatch without chat UI",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion app inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion documents create",
+      "passed": true
+    },
+    {
+      "command": "fusion workspace activate",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches list",
+      "passed": true
+    },
+    {
+      "command": "fusion checkpoint begin",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches rectangles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies list",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies measure",
+      "passed": true
+    },
+    {
+      "command": "fusion checkpoint status",
+      "passed": true
+    },
+    {
+      "command": "fusion checkpoint finish",
+      "passed": true
+    },
+    {
+      "command": "fusion checkpoint restore",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches list",
+      "passed": true
+    },
+    {
+      "command": "fusion checkpoint status",
+      "passed": true
+    },
+    {
+      "command": "fusion checkpoint finish",
+      "passed": true
+    },
+    {
+      "command": "fusion documents close",
+      "passed": true
+    },
+    {
+      "command": "fusion documents activate",
+      "passed": true
+    },
+    {
+      "command": "fusion workspace activate",
+      "passed": true
+    },
+    {
+      "command": "fusion app inspect",
+      "passed": true
+    }
+  ],
+  "raw_report_sha256": "f28e9d82e9e473ae30915327407e0f2a8ceb28e741c5d3c899f5112a7bd8e16b"
+}

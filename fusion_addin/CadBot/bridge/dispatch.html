@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Fusion CLI dispatch</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; connect-src 'none'"></head>
+<body><script>
+'use strict';
+// An invisible local wakeup for Fusion's main-thread queue. No CAD arguments,
+// credentials, external resources, conversation state or user interface.
+async function dispatch() {
+  try {
+    if (window.adsk && window.adsk.fusionSendData) {
+      await window.adsk.fusionSendData('dispatch', '');
+    }
+  } catch (_) {
+    // Retry the wakeup after a transient native binding failure. CAD requests
+    // remain queued and bounded by the dispatcher's cancellation timeout.
+  } finally {
+    setTimeout(dispatch, 250);
+  }
+}
+dispatch();
+</script></body></html>

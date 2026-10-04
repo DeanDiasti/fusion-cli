@@ -1,8 +1,13 @@
 """Registry of callable CAD tools exposed over the bridge."""
 
 from tools import sketch_edit, interference, sketch_support, features, inspection, sketch, state, editing, bodies, motion, admin, animation, animation_entities, animation_actions, jobs, design_management, core_design, design_assemblies, design_extended, design_structure, design_solids, design_sheet_metal
+from tools import checkpoints
 
 _TOOL_MAP = {
+    'checkpoint_begin':checkpoints.begin,
+    'checkpoint_finish':checkpoints.finish,
+    'checkpoint_status':checkpoints.status,
+    'checkpoint_restore':checkpoints.restore,
     'sketch_offset':sketch_edit.offset,
     'sketch_trim':sketch_edit.trim,
     'interference_check':interference.check,

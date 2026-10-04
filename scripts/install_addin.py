@@ -1,19 +1,17 @@
 """Stage a complete install before replacing CadBot; retain a recoverable backup."""
 import argparse
 from datetime import datetime
-import json
 import os
 from pathlib import Path
 import secrets
 import shutil
-import sys
 import tempfile
 
 
-def install(project, destination, python):
+def install(project, destination):
     project, destination = Path(project).resolve(), Path(destination).absolute()
     source = project / 'fusion_addin' / 'CadBot'
-    if not (source / 'CadBot.py').is_file() or not (project / 'agent' / 'palette_worker.py').is_file():
+    if not (source / 'CadBot.py').is_file() or not (project / 'cli' / 'fusion_cli.py').is_file():
         raise ValueError('Incomplete source tree; no installed files were changed.')
     destination.parent.mkdir(parents=True, exist_ok=True)
     staging = Path(tempfile.mkdtemp(prefix='.cadbot-stage-', dir=destination.parent))
@@ -21,9 +19,8 @@ def install(project, destination, python):
     try:
         shutil.copytree(source, staging, dirs_exist_ok=True,
                         ignore=shutil.ignore_patterns('__pycache__', '*.pyc', '.DS_Store'))
-        shutil.copytree(project / 'agent', staging / 'agent', dirs_exist_ok=True,
+        shutil.copytree(project / 'cli', staging / 'cli', dirs_exist_ok=True,
                         ignore=shutil.ignore_patterns('__pycache__', '*.pyc', '.DS_Store'))
-        (staging / 'runtime_config.json').write_text(json.dumps({'python': str(python), 'project': str(project)}))
         token = ''
         for candidate in (source / '.bridge_token', destination / '.bridge_token'):
             if candidate.is_file():
@@ -52,7 +49,7 @@ def main():
     parser.add_argument('--destination', type=Path, default=Path.home() / 'Library/Application Support/Autodesk/Autodesk Fusion 360/API/AddIns/CadBot')
     args = parser.parse_args()
     project = Path(__file__).resolve().parents[1]
-    backup = install(project, args.destination, sys.executable)
+    backup = install(project, args.destination)
     print('Installed:', args.destination)
     if backup:
         print('Previous installation:', backup)

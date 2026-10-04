@@ -1,14 +1,14 @@
 # Fusion CLI implementation status
 
-## Release 0.5.0 — 2026-10-03
+## Release 0.6.0 — 2026-10-03
 
-Build `41b3c0f4c7e81a3a`, protocol 3, was validated on Autodesk Fusion
-2705.1.15/macOS. The catalog contains 257 canonical commands: 41 Administration,
-196 Design, and 20 Animation. See [release evidence and reproducible checks](release-0.5.0.md).
+Build `eed1b12ce2969c86`, protocol 4, was validated on Autodesk Fusion
+2705.1.15/macOS. The catalog contains 261 canonical commands: 45 Administration,
+196 Design, and 20 Animation. See [release evidence and reproducible checks](release-0.6.0.md).
 
 | Section | Passing command cases | Explicit unavailable paths | Unverified / failures |
 | --- | ---: | ---: | ---: |
-| Administration | 40 | 1 | 0 / 0 |
+| Administration | 44 | 1 | 0 / 0 |
 | Design | 191 | 5 | 0 / 0 |
 | Animation | 20 | 0 | 0 / 0 |
 
@@ -18,13 +18,18 @@ refusal. The unavailable paths are not counted as successful feature executions.
 
 ## Changes from the review
 
+- Removed the chat UI, worker and Codex SDK; moved the terminal entry points to `cli/`.
+- Added explicit begin/finish/status/restore controls for verified Design checkpoints.
+- Added an invisible local main-thread wakeup for Fusion runtimes with rejected
+  custom events; it exposes no CAD arguments or conversation interface.
+
 - Added parametric topology-matched sketch offset and segment trimming, with
   dimension association, geometry, and checkpoint restoration checks.
 - Added occurrence-aware motion-joint discovery, easing, holds, configurable
   feasibility samples, and once/loop/ping-pong HTML playback.
 - Added current-pose interference and sampled coordinated motion inspection,
   with root-assembly scope checks and mm³ pair-volume reporting.
-- Fixed palette status polling during temporary capture: the status callback
+- Fixed reentrant checkpoint status checks during temporary capture: the status callback
   reports busy without validating an uncommitted pose against the saved signature.
 
 

@@ -6,31 +6,28 @@ the CAD operation, proposed flags, expected geometry and failure behavior. Check
 
 ## Set up
 
-Fork and clone the repository, then create a virtual environment and install
-`requirements.txt`. Python 3.10+ and Node.js are needed for host checks. Autodesk
+Fork and clone the repository, then create a virtual environment. The Python
+code uses only the standard library. Python 3.10+ and Node.js are needed for host checks. Autodesk
 Fusion is required only for native gates. The included installation workflow is
 validated on macOS; do not claim Windows support based on mock tests.
 Use Python 3.14+ for the publication guard, which decompresses the Fusion fixture.
 
 ```bash
 python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python -m unittest discover -s tests -p 'test_*.py'
-node tests/test_palette.cjs
 node tests/test_motion_player.cjs
-.venv/bin/python agent/fusion_cli.py help
+.venv/bin/python cli/fusion_cli.py help
 ```
 
-The tests use mocked SDK calls and fake Fusion objects. They must not connect to
+The tests use fake Fusion objects. They must not connect to
 a model, modify a real design, require credentials or operate a cloud account.
-`tests/smoke_chat.py` is an optional account-backed test and is excluded from CI.
 Native and HTTP scripts are explicit manual gates, not unit-test discovery targets.
 
 ## Implement a command
 
 1. Add a finite command and typed flags to `bridge/commands.py`, with useful offline
    help and input validation. Register its handler in `tools/registry.py`.
-2. Classify its effect correctly. Design mutations use message transactions;
+2. Classify its effect correctly. Design mutations use explicit checkpoint transactions;
    temporary previews use the preview controller and verified rollback. Native
    Animation, cloud and document operations have different restoration boundaries.
 3. Validate the complete request before changing geometry. Use explicit selectors,
