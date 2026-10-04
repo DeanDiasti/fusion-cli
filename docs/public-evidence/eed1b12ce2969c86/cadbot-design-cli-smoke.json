@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "build": "eed1b12ce2969c86",
+  "transport": "native CLI dispatch",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion documents create",
+      "passed": true
+    },
+    {
+      "command": "fusion workspace activate",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches rectangle",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches rename",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies measure",
+      "passed": true
+    },
+    {
+      "command": "fusion design features fillet",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies measure",
+      "passed": true
+    },
+    {
+      "command": "fusion design export",
+      "passed": true
+    },
+    {
+      "command": "fusion documents close",
+      "passed": true
+    }
+  ],
+  "raw_report_sha256": "972121cd267e44d9d47eb797e8c0de62bd601f49db0efed1bb224fea5012e0c9"
+}

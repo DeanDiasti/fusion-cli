@@ -10,6 +10,7 @@ on the main thread, and copies the result back to the waiting HTTP thread.
 import queue
 import threading
 import traceback
+from pathlib import Path
 
 import adsk.core
 
@@ -27,11 +28,28 @@ class Dispatcher:
         self._custom_event = None
         self._running = False
         self._handler = _DispatchHandler(self)
+        self._pump = None
+        self._pump_handler = _HTMLDispatchHandler(self)
 
     def start(self):
         self._custom_event = self._app.registerCustomEvent(_CUSTOM_EVENT_ID)
+        if self._custom_event is None:
+            raise RuntimeError('Fusion could not register the CLI dispatch event. Stop the old bridge before restarting.')
         self._custom_event.add(self._handler)
-        self._running = True
+        try:
+            # Fusion 2705.1.15 can register a custom event yet reject every
+            # fireCustomEvent call. A hidden local HTML callback provides an
+            # independent, main-thread wakeup; it exposes no commands or UI.
+            self._pump = self._ui.palettes.add(
+                'FusionCliDispatchPump', 'Fusion CLI dispatch',
+                Path(__file__).with_name('dispatch.html').as_uri(),
+                False, False, False, 1, 1)
+            if self._pump is None or not self._pump.incomingFromHTML.add(self._pump_handler):
+                raise RuntimeError('Fusion could not start the CLI dispatch callback.')
+            self._running = True
+        except Exception:
+            self.stop()
+            raise
 
     def stop(self):
         self._running = False
@@ -40,10 +58,20 @@ class Dispatcher:
                 self._queue.get_nowait().cancel("CadBot dispatcher is stopped")
             except queue.Empty:
                 break
-        if self._custom_event:
-            self._custom_event.remove(self._handler)
-            self._app.unregisterCustomEvent(_CUSTOM_EVENT_ID)
-            self._custom_event = None
+        pump, event = self._pump, self._custom_event
+        self._pump = self._custom_event = None
+        try:
+            if pump is not None and pump.isValid:
+                try:
+                    pump.incomingFromHTML.remove(self._pump_handler)
+                finally:
+                    pump.deleteMe()
+        finally:
+            if event is not None:
+                try:
+                    event.remove(self._handler)
+                finally:
+                    self._app.unregisterCustomEvent(_CUSTOM_EVENT_ID)
 
     def call(self, fn, *args, **kwargs):
         """Run fn on Fusion's main thread and return (ok, result_or_error)."""
@@ -52,13 +80,13 @@ class Dispatcher:
         work = _WorkItem(lambda: fn(*args, **kwargs))
         self._queue.put(work)
         try:
-            # The palette's HTML poll also drains the queue on the main thread.
-            # Some Fusion sessions reject custom events after startup UI restore.
-            self._app.fireCustomEvent(_CUSTOM_EVENT_ID)
+            if not self._app.fireCustomEvent(_CUSTOM_EVENT_ID) and self._pump is None:
+                work.cancel('Fusion rejected the CLI dispatch event. Stop and restart the bridge add-in.')
         except Exception:
-            pass
+            if self._pump is None:
+                work.cancel('Fusion could not queue the CLI dispatch event. Stop and restart the bridge add-in.')
         if not work.done.wait(_CALL_TIMEOUT_SECONDS):
-            if not work.cancel("Timed out waiting for Fusion main thread. Reopen CadBot and retry."):
+            if not work.cancel("Timed out waiting for Fusion main thread. Inspect state before retrying."):
                 # Execution already started. Do not report failure while a CAD
                 # operation is still changing the design and invite a duplicate.
                 work.done.wait()
@@ -71,7 +99,7 @@ class Dispatcher:
         self.drain()
 
     def drain(self):
-        """Called only from Fusion custom-event or palette HTML callbacks."""
+        """Called only from Fusion's main-thread custom or HTML callbacks."""
         while True:
             try:
                 work = self._queue.get_nowait()
@@ -124,3 +152,15 @@ class _DispatchHandler(adsk.core.CustomEventHandler):
 
     def notify(self, args):
         self._dispatcher._on_custom_event(args)
+
+
+class _HTMLDispatchHandler(adsk.core.HTMLEventHandler):
+    def __init__(self, dispatcher):
+        super().__init__()
+        self._dispatcher = dispatcher
+
+    def notify(self, args):
+        # The local page is only a wakeup. No command/data is accepted from HTML.
+        if args.action == 'dispatch' and args.data == '':
+            self._dispatcher.drain()
+        args.returnData = '{}'

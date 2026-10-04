@@ -1,0 +1,69 @@
+{
+  "original_model_touched": false,
+  "passed": true,
+  "build": "eed1b12ce2969c86",
+  "transport": "native Fusion disposable fixture",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion design joints geometry list",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints create",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints create",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints create",
+      "passed": true
+    },
+    {
+      "command": "fusion design lofts create",
+      "passed": true
+    },
+    {
+      "command": "fusion design solid-features edit",
+      "passed": false,
+      "blocker_matched": true,
+      "outcome": "capability_blocked"
+    },
+    {
+      "command": "fusion design lofts create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sweeps create",
+      "passed": true
+    },
+    {
+      "command": "fusion design surfaces patch",
+      "passed": true
+    },
+    {
+      "command": "fusion design surfaces inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design surfaces delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design surfaces thicken",
+      "passed": true
+    },
+    {
+      "command": "fusion design capabilities",
+      "passed": true
+    },
+    {
+      "command": "fusion design sheet-metal capabilities",
+      "passed": true
+    }
+  ],
+  "raw_report_sha256": "21002aeab3825ee7eed0e846f87482e14df543822e9cbf9e452cc1637ca8e335"
+}

@@ -16,6 +16,7 @@ REPORTS = (
     'cadbot-admin-release-smoke.json', 'cadbot-animation-release-smoke.json',
     'cadbot-design-coverage-http.json', 'cadbot-design-sketch-curves-smoke.json',
     'cadbot-animation-playback-http.json', 'cadbot-release-policy-http.json',
+    'cadbot-cli-checkpoints-http.json',
 )
 
 

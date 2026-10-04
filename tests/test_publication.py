@@ -36,7 +36,7 @@ class PublicationTests(unittest.TestCase):
                      '.env.production'):
             with self.subTest(path=path):self.assertFalse(is_public_path(path))
         for path in ('LICENSE','.github/workflows/ci.yml','tests/fusion_design_motion_smoke.py',
-                     'docs/public-evidence/build/report.json','agent/codex_agent.py'):
+                     'docs/public-evidence/build/report.json','cli/fusion_cli.py'):
             self.assertTrue(is_public_path(path),path)
 
     def test_scanner_recognizes_sensitive_markers_without_returning_them(self):

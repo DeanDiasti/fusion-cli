@@ -1,0 +1,298 @@
+{
+  "original_model_touched": false,
+  "passed": true,
+  "fixture_closed": true,
+  "original_document_restored": true,
+  "build": "eed1b12ce2969c86",
+  "transport": "native Fusion disposable extended Design fixture",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion design capabilities",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design surfaces patch",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design surfaces inspect",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design surfaces thicken",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design surfaces patch",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design surfaces delete",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design surfaces stitch",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design forms list",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design forms create-from-tsm",
+      "passed": false,
+      "blocker_matched": true,
+      "outcome": "capability_blocked"
+    },
+    {
+      "command": "fusion design forms inspect",
+      "passed": false,
+      "blocker_matched": true,
+      "outcome": "capability_blocked"
+    },
+    {
+      "command": "fusion design forms rename",
+      "passed": false,
+      "blocker_matched": true,
+      "outcome": "capability_blocked"
+    },
+    {
+      "command": "fusion design forms delete",
+      "passed": false,
+      "blocker_matched": true,
+      "outcome": "capability_blocked"
+    },
+    {
+      "command": "fusion help",
+      "passed": false,
+      "blocker_matched": true,
+      "outcome": "capability_blocked"
+    },
+    {
+      "command": "fusion design materials inspect",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design materials copy",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design materials edit",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design materials delete",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design materials apply",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design materials apply",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design materials clear-appearance",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal capabilities",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion help",
+      "passed": false,
+      "blocker_matched": true,
+      "outcome": "capability_blocked"
+    },
+    {
+      "command": "fusion help",
+      "passed": false,
+      "blocker_matched": true,
+      "outcome": "capability_blocked"
+    },
+    {
+      "command": "fusion design sheet-metal components create",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal rules copy",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal rules inspect",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal rules edit",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal rules delete",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal faces list",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal convert",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal folds create",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal features inspect",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal folds edit-angle",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal unfolds create",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal features inspect",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal unfolds edit",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal refolds create",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal features inspect",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal flat-pattern create",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal flat-pattern inspect",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal flat-pattern rename",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal flat-pattern delete",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal features delete",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal rules list-all",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal rules assign",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design sheet-metal features list",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design configurations initialize",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design configurations create",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design configurations inspect",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design configurations copy",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design configurations rename",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design configurations activate",
+      "passed": true,
+      "outcome": "executed"
+    },
+    {
+      "command": "fusion design configurations edit",
+      "passed": false,
+      "blocker_matched": true,
+      "outcome": "capability_blocked"
+    },
+    {
+      "command": "fusion design configurations delete",
+      "passed": true,
+      "outcome": "executed"
+    }
+  ],
+  "summary": {
+    "executed": 46,
+    "passed": 46,
+    "failed": 0,
+    "capability_blocked": 8,
+    "blockers_matched": 8
+  },
+  "raw_report_sha256": "2f08d3a9712dbd3a4c79595c7dcf7426fa6a947f49aa1f7959f6a578229efd2a"
+}

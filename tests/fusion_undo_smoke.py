@@ -15,20 +15,20 @@ try:
  d=adsk.fusion.Design.cast(app.activeProduct)
  controller=FusionUndo()
  for number in range(3):
-  controller.begin('message-'+str(number))
+  controller.begin('checkpoint-'+str(number))
   controller.execute(lambda a: d.rootComponent.sketches.add(d.rootComponent.xYConstructionPlane).name,{})
   controller.finish()
  report['before']=d.rootComponent.sketches.count
  report['status']=controller.status()
- report['restore']=controller.restore('message-1')
+ report['restore']=controller.restore('checkpoint-1')
  report['after']=d.rootComponent.sketches.count
- report['restore_all']=controller.restore('message-0')
+ report['restore_all']=controller.restore('checkpoint-0')
  report['empty']=d.rootComponent.sketches.count
- controller.begin('message-new')
+ controller.begin('checkpoint-new')
  controller.execute(lambda a:d.rootComponent.sketches.add(d.rootComponent.xYConstructionPlane).name,{})
  controller.finish()
  d.rootComponent.sketches.add(d.rootComponent.xYConstructionPlane)
- try:controller.restore('message-new');report['external']='FAILED: undo was allowed'
+ try:controller.restore('checkpoint-new');report['external']='FAILED: undo was allowed'
  except Exception as e:report['external']=str(e)
  report['after_external']=d.rootComponent.sketches.count
 except Exception:report['error']=traceback.format_exc()

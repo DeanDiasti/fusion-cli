@@ -1,0 +1,146 @@
+{
+  "passed": true,
+  "geometry_undo_verified": true,
+  "collision_volume_verified": true,
+  "pose_restored_verified": true,
+  "original_context_restored": true,
+  "build": "eed1b12ce2969c86",
+  "transport": "installed HTTP CLI dispatch",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion app inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion documents create",
+      "passed": true
+    },
+    {
+      "command": "fusion workspace activate",
+      "passed": true
+    },
+    {
+      "command": "fusion design components create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches rectangles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design components create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches rectangles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design occurrences ground",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches circles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches lines add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches lines add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches lines add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches offset",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches trim",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches geometry list",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints list",
+      "passed": true
+    },
+    {
+      "command": "fusion design motion joints list",
+      "passed": true
+    },
+    {
+      "command": "fusion design interference check",
+      "passed": true
+    },
+    {
+      "command": "fusion design motion check",
+      "passed": true
+    },
+    {
+      "command": "fusion design motion inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design motion render",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints list",
+      "passed": true
+    },
+    {
+      "command": "fusion documents close",
+      "passed": true
+    },
+    {
+      "command": "fusion documents activate",
+      "passed": true
+    },
+    {
+      "command": "fusion workspace activate",
+      "passed": true
+    },
+    {
+      "command": "fusion app inspect",
+      "passed": true
+    }
+  ],
+  "raw_report_sha256": "8098d5f1a92ee3262744e1906a461b9db06627f2456fc1802b38c5b954ba8df3"
+}

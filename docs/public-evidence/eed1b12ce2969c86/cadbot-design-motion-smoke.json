@@ -1,0 +1,97 @@
+{
+  "passed": true,
+  "failure_injected_at_changed_pose": true,
+  "offset_association_verified": true,
+  "trim_geometry_verified": true,
+  "collision_volume_verified": true,
+  "coordinated_motion_verified": true,
+  "failed_analysis_rollback_verified": true,
+  "original_context_restored": true,
+  "build": "eed1b12ce2969c86",
+  "transport": "native CLI with checkpoint transactions",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion design motion joints list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches circles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches lines add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches lines add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches lines add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches lines add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches offset",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches dimensions set",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches trim",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches trim",
+      "passed": true
+    },
+    {
+      "command": "fusion design interference check",
+      "passed": true
+    },
+    {
+      "command": "fusion design interference check",
+      "passed": true
+    },
+    {
+      "command": "fusion design motion check",
+      "passed": true
+    },
+    {
+      "command": "fusion design motion inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design motion render",
+      "passed": true
+    },
+    {
+      "command": "fusion design motion render",
+      "passed": true
+    },
+    {
+      "command": "fusion design motion render",
+      "passed": true
+    }
+  ],
+  "raw_report_sha256": "ef722199f4e1fa46f6a7435650a4ffee272fa149093644b9e19a753f48946380"
+}

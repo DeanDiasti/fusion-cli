@@ -4,7 +4,6 @@ import test_startup
 from bridge.commands import prepare, SPECS
 from bridge import server
 from tools.registry import _TOOL_MAP
-import cad_mcp
 
 
 class CommandTests(unittest.TestCase):
@@ -39,9 +38,6 @@ class CommandTests(unittest.TestCase):
     def test_no_python_exposed(self):
         self.assertNotIn('fusion_execute',_TOOL_MAP)
         self.assertNotIn('fusion_api_help',_TOOL_MAP)
-        self.assertEqual([x['name'] for x in cad_mcp.tool_specs()],['fusion'])
-        with self.assertRaises(ValueError):
-            cad_mcp.respond({'method':'tools/call','params':{'name':'fusion_execute','arguments':{'code':'x'}}})
 
     def test_dispatch_read_vs_edit(self):
         owner = Mock()

@@ -9,13 +9,15 @@ from unittest.mock import Mock, patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'fusion_addin' / 'CadBot'))
-sys.path.insert(0, str(ROOT / 'agent'))
+sys.path.insert(0, str(ROOT / 'cli'))
 adsk = ModuleType('adsk')
 core = ModuleType('adsk.core')
 fusion = ModuleType('adsk.fusion')
 adsk.core, adsk.fusion = core, fusion
 core.CustomEventHandler = type('CustomEventHandler', (), {})
 core.ApplicationEventHandler = type('ApplicationEventHandler', (), {})
+core.ApplicationCommandEventHandler = type('ApplicationCommandEventHandler', (), {})
+core.DocumentEventHandler = type('DocumentEventHandler', (), {})
 core.HTMLEventHandler = type('HTMLEventHandler', (), {})
 core.CommandCreatedEventHandler = type('CommandCreatedEventHandler', (), {})
 core.Application = SimpleNamespace(get=Mock())
@@ -24,7 +26,6 @@ sys.modules.update({'adsk': adsk, 'adsk.core': core, 'adsk.fusion': fusion})
 import CadBot
 from bridge.dispatch import Dispatcher
 from bridge.server import BridgeServer
-import codex_agent
 from tools import state
 
 
@@ -57,27 +58,11 @@ class StartupTests(unittest.TestCase):
         self.app.unregisterCustomEvent.assert_called_once()
         self.assertFalse(dispatcher.call(lambda: 42)[0])
 
-    def test_html_poll_executes_when_custom_event_is_rejected(self):
-        dispatcher = Dispatcher()
-        dispatcher.start()
-        self.app.fireCustomEvent.return_value = False
-        queued = threading.Event()
-        self.app.fireCustomEvent.side_effect = lambda *_: queued.set() or False
-        result = []
-        main_thread = threading.get_ident()
-        t = threading.Thread(target=lambda: result.append(dispatcher.call(threading.get_ident)))
-        t.start()
-        self.assertTrue(queued.wait(2))
-        with patch.object(CadBot, '_dispatcher', dispatcher), patch.object(CadBot, '_chat', None):
-            CadBot._ChatHTMLHandler().notify(SimpleNamespace(action='poll', returnData=''))
-        t.join(2)
-        self.assertEqual(result, [(True, main_thread)])
-        dispatcher.stop()
 
     def test_timed_out_work_never_executes_on_later_event(self):
         dispatcher = Dispatcher()
         dispatcher.start()
-        self.app.fireCustomEvent.return_value = False
+        self.app.fireCustomEvent.return_value = True
         fn = Mock()
         with patch('bridge.dispatch._CALL_TIMEOUT_SECONDS', 0.001):
             ok, result = dispatcher.call(fn)
@@ -90,7 +75,7 @@ class StartupTests(unittest.TestCase):
         dispatcher = Dispatcher()
         dispatcher.start()
         queued = threading.Event()
-        self.app.fireCustomEvent.side_effect = lambda *_: queued.set() or False
+        self.app.fireCustomEvent.side_effect = lambda *_: queued.set() or True
         fn = Mock()
         result = []
         t = threading.Thread(target=lambda: result.append(dispatcher.call(fn)))
@@ -108,98 +93,19 @@ class StartupTests(unittest.TestCase):
             with self.assertRaisesRegex(OSError, 'port occupied'):
                 BridgeServer('localhost', 8765, Mock())
 
-    def test_run_builds_palette_with_correct_signature(self):
-        CadBot._bridge = None
-        self.app.userInterface.palettes.itemById.return_value = None
-        with patch.object(CadBot, '_log'), patch.object(CadBot, 'Dispatcher'), patch.object(CadBot, 'BridgeServer'), patch.object(CadBot, 'threading'), patch.object(CadBot, '_create_toolbar_button'):
-            CadBot.run(None)
-            args = self.app.userInterface.palettes.add.call_args.args
-            self.assertEqual(args[3:], (False, True, True, 440, 650))
-            from urllib.parse import urlparse, unquote
-            self.assertTrue(Path(unquote(urlparse(args[2]).path)).is_file())
-            self.assertEqual(CadBot._palette.dockingState, 4)
-            self.assertFalse(CadBot._palette.isDockedInCanvas)
-            self.assertTrue(CadBot._palette.isVisible)
-            CadBot.stop(None)
 
-    def test_running_addin_recreates_missing_palette(self):
-        CadBot._bridge = Mock()
-        CadBot._ui = self.app.userInterface
-        CadBot._palette = Mock(isValid=False)
-        self.app.userInterface.palettes.itemById.return_value = None
-        with patch.object(CadBot, '_log'):
-            CadBot.run(None)
-        self.app.userInterface.palettes.add.assert_called_once()
-        self.assertTrue(CadBot._palette.isVisible)
-        CadBot._bridge = None
 
-    def test_startup_defers_window_until_application_ready(self):
-        CadBot._bridge = None
-        self.app.userInterface.palettes.itemById.return_value = None
-        with patch.object(CadBot, '_log'), patch.object(CadBot, 'Dispatcher'), patch.object(CadBot, 'BridgeServer'), patch.object(CadBot, 'threading'), patch.object(CadBot, '_create_toolbar_button'):
-            CadBot.run({'IsApplicationStartup': True})
-            self.app.userInterface.palettes.add.assert_not_called()
-            handler = self.app.startupCompleted.add.call_args.args[0]
-            handler.notify(None)
-            self.app.userInterface.palettes.add.assert_called_once()
-            CadBot.stop(None)
 
     def test_startup_failure_cleans_dispatcher(self):
         CadBot._bridge = None
-        with patch.object(CadBot, '_log'), patch.object(CadBot, 'Dispatcher') as factory, patch.object(CadBot, 'BridgeServer', side_effect=OSError('port occupied')):
+        with patch.object(CadBot, 'Dispatcher') as factory, patch.object(CadBot, 'BridgeServer', side_effect=OSError('port occupied')):
             CadBot.run(None)
             factory.return_value.stop.assert_called_once()
             self.assertIsNone(CadBot._dispatcher)
 
-    def test_shutdown_survives_palette_deletion_failure(self):
-        palette = Mock(isValid=True, isNative=False)
-        palette.deleteMe.side_effect = RuntimeError('3 : Cannot delete native palette.')
-        bridge, thread, dispatcher = Mock(), Mock(), Mock()
-        CadBot._palette, CadBot._bridge = palette, bridge
-        CadBot._bridge_thread, CadBot._dispatcher = thread, dispatcher
-        CadBot._ui = self.app.userInterface
-        with patch.object(CadBot, '_log'), patch.object(CadBot, '_remove_toolbar_button') as toolbar:
-            CadBot.stop(None)
-            toolbar.assert_called_once()
-            bridge.shutdown.assert_called_once()
-            thread.join.assert_called_once_with(timeout=5)
-            dispatcher.stop.assert_called_once()
-            CadBot.stop(None)  # Repeated stop must be harmless.
-            bridge.shutdown.assert_called_once()
-        self.app.userInterface.messageBox.assert_not_called()
-        self.assertIsNone(CadBot._palette)
-        self.assertIsNone(CadBot._dispatcher)
 
-    def test_palette_cleanup_only_deletes_valid_custom_palette(self):
-        with patch.object(CadBot, '_log'):
-            for valid, native, expected in [(False, False, 0), (True, True, 0), (True, False, 1)]:
-                palette = Mock(isValid=valid, isNative=native)
-                CadBot._delete_palette(palette)
-                self.assertEqual(palette.deleteMe.call_count, expected)
 
-    def test_html_actions_use_managed_chat(self):
-        import json
-        CadBot._chat = None
-        handler = CadBot._ChatHTMLHandler()
-        with patch.object(CadBot, 'ChatSession') as factory, patch.object(CadBot, '_load_token', return_value='test'):
-            args = SimpleNamespace(action='ready', data='{}', returnData='')
-            handler.notify(args)
-            factory.return_value.start.assert_called_once()
-            self.assertTrue(json.loads(args.returnData)['ok'])
-            args.action, args.data = 'send', '{"text":"hello"}'
-            handler.notify(args)
-            factory.return_value.send.assert_called_once_with({'text': 'hello', 'action': 'send'})
-            factory.return_value.poll.return_value = [{'kind': 'delta', 'text': 'Hi'}]
-            args.action = 'poll'
-            handler.notify(args)
-            self.assertEqual(json.loads(args.returnData)['events'][0]['text'], 'Hi')
-        CadBot._chat = None
 
-    def test_agent_checks_matching_runtime_before_startup(self):
-        with patch('codex_agent.runtime_status', return_value=({'runtime': {'ok': True}}, 200)):
-            self.assertTrue(codex_agent.check_bridge())
-        with patch('codex_agent.runtime_status', return_value=({'error': 'stale runtime'}, 409)):
-            self.assertFalse(codex_agent.check_bridge())
 
     def test_line_dimension_uses_fusion_aligned_orientation(self):
         from tools import sketch
@@ -274,6 +180,79 @@ class StartupTests(unittest.TestCase):
     def test_state_accepts_tool_args(self):
         fusion.Design = SimpleNamespace(cast=lambda _: None)
         self.assertIn('error', state.get_state({}))
+
+    def test_rejected_event_uses_hidden_main_thread_callback(self):
+        dispatcher = Dispatcher(); dispatcher.start()
+        queued = threading.Event()
+        self.app.fireCustomEvent.side_effect = lambda *_: queued.set() or False
+        fn = Mock(return_value=42); result = []
+        thread = threading.Thread(target=lambda: result.append(dispatcher.call(fn)))
+        thread.start(); self.assertTrue(queued.wait(2)); fn.assert_not_called()
+        handler = dispatcher._pump_handler
+        handler.notify(SimpleNamespace(action='arbitrary', data=''))
+        handler.notify(SimpleNamespace(action='dispatch', data='untrusted command'))
+        fn.assert_not_called()
+        handler.notify(SimpleNamespace(action='dispatch', data=''))
+        thread.join(2); self.assertEqual(result, [(True,42)])
+        fn.assert_called_once(); dispatcher.stop()
+        self.app.userInterface.palettes.add.assert_called_once()
+        self.assertEqual(self.app.userInterface.palettes.add.call_args.args[3:],
+                         (False, False, False, 1, 1))
+
+    def test_hidden_callback_failure_cleans_registered_event(self):
+        self.app.userInterface.palettes.add.return_value = None
+        with self.assertRaisesRegex(RuntimeError, 'dispatch callback'):
+            Dispatcher().start()
+        self.app.unregisterCustomEvent.assert_called_once()
+
+    def test_hidden_callback_cleanup_failure_still_unregisters_event(self):
+        dispatcher = Dispatcher(); dispatcher.start()
+        dispatcher._pump.deleteMe.side_effect = RuntimeError('stale UI object')
+        with self.assertRaisesRegex(RuntimeError, 'stale UI object'):
+            dispatcher.stop()
+        self.app.unregisterCustomEvent.assert_called_once()
+        self.assertFalse(dispatcher._running)
+
+    def test_registration_failure_is_reported_before_starting(self):
+        self.app.registerCustomEvent.return_value = None
+        with self.assertRaisesRegex(RuntimeError, 'register'):
+            Dispatcher().start()
+
+    def test_bridge_starts_without_chat_toolbar_or_worker(self):
+        CadBot._bridge = CadBot._startup_handler = None
+        with patch.object(CadBot, 'Dispatcher') as dispatcher, patch.object(CadBot, 'BridgeServer') as bridge, patch.object(CadBot, 'threading'):
+            CadBot.run(None)
+            dispatcher.return_value.start.assert_called_once()
+            bridge.assert_called_once_with('localhost', 8765, dispatcher.return_value)
+            self.app.userInterface.palettes.add.assert_not_called()
+            self.app.userInterface.commandDefinitions.addButtonDefinition.assert_not_called()
+            CadBot.run(None); bridge.assert_called_once()
+            CadBot.stop(None)
+
+    def test_bridge_startup_waits_for_fusion_initialization(self):
+        CadBot._bridge = CadBot._startup_handler = None
+        self.app.isStartupComplete = False
+        with patch.object(CadBot, '_start_bridge') as start:
+            CadBot.run({'IsApplicationStartup': True})
+            start.assert_not_called()
+            handler = self.app.startupCompleted.add.call_args.args[0]
+            handler.notify(None)
+            start.assert_called_once()
+            self.assertIsNone(CadBot._startup_handler)
+
+    def test_shutdown_continues_after_checkpoint_and_server_errors(self):
+        from bridge import server
+        bridge, thread, dispatcher = Mock(), Mock(), Mock()
+        bridge.shutdown.side_effect = RuntimeError('shutdown failed')
+        controller = Mock(); controller.close.side_effect = RuntimeError('close failed')
+        CadBot._bridge, CadBot._bridge_thread, CadBot._dispatcher = bridge, thread, dispatcher
+        with patch.object(server, '_undo', controller):
+            CadBot.stop(None)
+            thread.join.assert_called_once_with(timeout=5)
+            dispatcher.stop.assert_called_once()
+            self.assertIsNone(server._undo)
+            CadBot.stop(None); bridge.shutdown.assert_called_once()
+        self.assertIsNone(CadBot._dispatcher)
 
 if __name__ == '__main__':
     unittest.main()

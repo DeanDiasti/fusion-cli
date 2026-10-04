@@ -11,6 +11,19 @@ from pathlib import Path
 
 
 class AdminCommandsTests(unittest.TestCase):
+    def test_build_binds_dispatch_page_but_excludes_installed_cli(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root/'bridge').mkdir(); (root/'cli').mkdir()
+            page = root/'bridge/dispatch.html'
+            page.write_text('first callback')
+            before = fingerprint(root)
+            (root/'cli/fusion_cli.py').write_text('external client')
+            self.assertEqual(before, fingerprint(root))
+            page.write_text('changed callback')
+            self.assertNotEqual(before, fingerprint(root))
+
     def test_nested_command(self):
         handler,args,edit=prepare({'command':'fusion design sketches create --name "One two"'})
         self.assertEqual((handler,args,edit),('create_sketch',{'name':'One two'},True))
@@ -63,7 +76,7 @@ class AdminCommandsTests(unittest.TestCase):
 
     def test_build_handshake_accepts_matching_source(self):
         root=Path(__file__).resolve().parents[1]/'fusion_addin'/'CadBot'
-        response=io.BytesIO(json.dumps({'protocol':3,'build':fingerprint(root)}).encode())
+        response=io.BytesIO(json.dumps({'protocol':bridge_cli.load('build').PROTOCOL,'build':fingerprint(root)}).encode())
         response.status=200
         with patch.object(bridge_cli,'_open',return_value=response):
             self.assertIsNone(bridge_cli.verify_runtime())

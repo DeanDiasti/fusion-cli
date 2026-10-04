@@ -1,15 +1,14 @@
-fusion-cli / CadBot
+fusion-cli
 Copyright (C) 2026 Dean Diasti and contributors
 
 Project source code, documentation, and original test fixtures are licensed under
 GNU GPL version 3 only (SPDX-License-Identifier: GPL-3.0-only). See LICENSE.
 
-Autodesk Fusion, its bundled API, and OpenAI Codex are separately provided
-products and are not distributed in this repository. Their names and trademarks
-belong to their respective owners. This is an independent community project,
-not an official Autodesk or OpenAI product.
+Autodesk Fusion and its bundled API are separately provided products and are not
+distributed in this repository. Their names and trademarks belong to their
+respective owners. This is an independent community project, not an official
+Autodesk product.
 
-The Python dependency openai-codex is provided under Apache-2.0; its dependencies
-retain their own licenses. Installing dependencies does not replace those terms.
-The synthetic Fusion playback fixture was created specifically for this project;
-see tests/fixtures/README.md for its provenance and verification limits.
+The CLI and installer use Python's standard library. The synthetic Fusion
+playback fixture was created specifically for this project; see
+tests/fixtures/README.md for its provenance and verification limits.

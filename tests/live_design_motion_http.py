@@ -4,7 +4,7 @@ import math
 from pathlib import Path
 import shlex
 import sys
-ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'agent'))
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'cli'))
 from bridge_cli import call
 q=shlex.quote
 report={'transport':'installed HTTP CLI dispatch','passed':False,'results':[]}

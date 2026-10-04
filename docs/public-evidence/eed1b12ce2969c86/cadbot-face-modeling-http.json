@@ -1,0 +1,121 @@
+{
+  "passed": true,
+  "undo_verified": true,
+  "participant_isolation_verified": true,
+  "original_context_restored": true,
+  "build": "eed1b12ce2969c86",
+  "transport": "installed HTTP CLI dispatch",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion app inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion documents create",
+      "passed": true
+    },
+    {
+      "command": "fusion workspace activate",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches rectangles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies rename",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches rectangles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies rename",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies topology list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches project",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches profiles list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches circles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches list",
+      "passed": true
+    },
+    {
+      "command": "fusion documents close",
+      "passed": true
+    },
+    {
+      "command": "fusion documents activate",
+      "passed": true
+    },
+    {
+      "command": "fusion workspace activate",
+      "passed": true
+    },
+    {
+      "command": "fusion app inspect",
+      "passed": true
+    }
+  ],
+  "raw_report_sha256": "61b2053aac2d3cb2659c915d00958b1365e7d77652afc1a6a3fc7ee2e3fc0ede"
+}

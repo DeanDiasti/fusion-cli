@@ -4,7 +4,7 @@ import json, os, shlex, sys, urllib.error, urllib.request
 from pathlib import Path
 
 URL=os.environ.get('CADBOT_BRIDGE_URL','http://localhost:8765')
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'agent'))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'cli'))
 from bridge_cli import TOKEN
 REPORT=Path('/tmp/cadbot-design-coverage-http.json'); rows=[]
 
@@ -83,8 +83,8 @@ try:
         run('fusion design timeline inspect --index 0',{'item':{'index':0}}); run('fusion design timeline beginning',{'marker_position':0}); run('fusion design timeline end',{'marker_position':timeline['count']}); run('fusion design timeline roll --position 0',{'marker_position':0}); run('fusion design timeline end',{'marker_position':timeline['count']})
     run('fusion design timeline groups list',{'groups':[]}); run('fusion design viewport screenshot --path /tmp/cadbot-design-coverage.png',{'path':'/tmp/cadbot-design-coverage.png'})
     # Timeline marker and screenshot operations intentionally invalidate the
-    # current message-level Design checkpoint.  Start a fresh message boundary
-    # before validating subsequent mutations, matching the palette workflow.
+    # current Design checkpoint. Start a fresh boundary before validating
+    # subsequent mutations.
     post('_checkpoint',{'action':'finish'})
     post('_checkpoint',{'action':'begin','id':'design-coverage-reset-smoke'})
     live_bodies=run('fusion design bodies list',{'bodies':[]})['bodies']

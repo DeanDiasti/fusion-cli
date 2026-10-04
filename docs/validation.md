@@ -1,7 +1,7 @@
 # Validation and evidence publication
 
-Host tests establish grammar, transport, transaction-controller contracts, worker
-behavior and failure paths using mocks. Native fixtures establish actual Fusion
+Host tests establish grammar, transport, transaction-controller contracts
+and failure paths using mocks. Native fixtures establish actual Fusion
 geometry, associations, solver behavior and cleanup. Installed HTTP gates exercise
 the bridge and main-thread dispatch end to end. Treat these as separate evidence.
 
@@ -9,13 +9,12 @@ the bridge and main-thread dispatch end to end. Treat these as separate evidence
 
 ```bash
 python -m unittest discover -s tests -p 'test_*.py'
-node tests/test_palette.cjs
 node tests/test_motion_player.cjs
 python scripts/check_public.py
 ```
 
-Install `requirements.txt` before running the complete host suite. No Codex sign-in,
-model call, Autodesk account or native Fusion operation is required. GitHub CI
+The complete host suite uses the standard library. No Autodesk account or native
+Fusion operation is required. GitHub CI
 runs these checks on Linux and macOS. CI uses pinned action revisions, read-only
 repository permissions and no project credentials.
 The publication guard requires Python 3.14+ for ZIP Zstandard entries in the native
@@ -36,8 +35,7 @@ cleanup invalidates a gate even if an individual command succeeded.
 
 Do not run cloud tests routinely: Administration creates files/folders and leaves
 an empty project because Fusion's public API cannot delete projects. Do not use
-private designs as fixtures. Live Codex smoke tests are optional, require account
-access and use synthetic data only; they are not part of CI.
+private designs as fixtures.
 
 ## Publish evidence without private data
 

@@ -2,13 +2,17 @@
 import hashlib
 from pathlib import Path
 
-PROTOCOL=3
+PROTOCOL=4
 
 
 def fingerprint(root):
     digest=hashlib.sha256()
-    for path in sorted(Path(root).rglob('*.py')):
-        if 'agent' in path.relative_to(root).parts:
+    paths = list(Path(root).rglob('*.py'))
+    pump = Path(root) / 'bridge' / 'dispatch.html'
+    if pump.is_file():
+        paths.append(pump)
+    for path in sorted(paths):
+        if 'cli' in path.relative_to(root).parts:
             continue
         digest.update(path.relative_to(root).as_posix().encode())
         digest.update(path.read_bytes())

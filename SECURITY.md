@@ -8,7 +8,7 @@ fixes when practical; no response or support deadline is guaranteed.
 Use [GitHub's private vulnerability reporting form](https://github.com/DeanDiasti/fusion-cli/security/advisories/new).
 Describe the affected version/build, reproduction with synthetic data, expected
 trust boundary and observed impact. Do not open a public issue containing an
-exploit, bridge token, Codex credentials, private CAD model or account identifiers.
+exploit, bridge token, private CAD model or account identifiers.
 A maintainer will coordinate disclosure after reviewing the report.
 
 ## Trust boundaries
@@ -20,13 +20,12 @@ an explicit private `CADBOT_BRIDGE_TOKEN` for real designs. Authentication prote
 a single-user local workflow; this is not a multi-user or remote CAD service.
 
 Do not expose port 8765 through forwarding, tunnels, proxies or a public interface.
-Treat same-user local processes, the running Fusion application and the Codex
-worker as trusted parts of the installation. Keep the project checkout and its
+Treat same-user local processes, the running Fusion application and CLI as trusted parts of the installation. Keep the project checkout and its
 virtual environment protected from untrusted writes.
 
 The CAD tool exposes a finite command grammar. Raw editing/administration calls,
 shell evaluation and arbitrary Python execution are disabled. CAD API work runs
-on Fusion's main thread. Design mutations require tracked message transactions;
+on Fusion's main thread. Design mutations require explicit tracked checkpoints;
 previews abort and verify model/pose restoration. Other operation classes have
 separate side effects and can invalidate Design checkpoints.
 
@@ -36,11 +35,10 @@ specific; use saved work and disposable fixtures when validating upgrades.
 
 ## Data handling
 
-AI chat can send prompts, reference images, requested CAD tool results and
-screenshots to Codex. Select only data you intend to use with that service. Saved
-conversations and reference attachments remain in the user's application-support
-history directory; they are not repository artifacts. The terminal CLI and
-read-only help do not invoke a model by themselves.
+The CLI sends typed commands and returns CAD results over the local authenticated
+bridge. Cloud administration commands use Fusion's existing Autodesk account.
+Generated screenshots, exports and previews can contain design data; choose
+output paths and publish artifacts deliberately.
 
 Ignore credentials, history, logs, private designs and runtime configuration.
 Raw validation reports can contain account metadata even when the geometry is
