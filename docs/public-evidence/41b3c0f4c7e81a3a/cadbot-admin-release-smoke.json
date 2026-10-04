@@ -1,0 +1,478 @@
+{
+  "passed": true,
+  "admin_command_count": 41,
+  "original_cloud_designs_modified": false,
+  "original_document_restored": false,
+  "original_workspace_restored": true,
+  "pristine_placeholder_replaced": true,
+  "cleanup_verified": true,
+  "build": "41b3c0f4c7e81a3a",
+  "transport": "native source CLI dispatch",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion app inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app capabilities",
+      "passed": true
+    },
+    {
+      "command": "fusion app state",
+      "passed": true
+    },
+    {
+      "command": "fusion app diagnostics",
+      "passed": true
+    },
+    {
+      "command": "fusion app preferences",
+      "passed": true
+    },
+    {
+      "command": "fusion workspace list",
+      "passed": true
+    },
+    {
+      "command": "fusion workspace activate",
+      "passed": true
+    },
+    {
+      "command": "fusion documents list",
+      "passed": true
+    },
+    {
+      "command": "fusion projects list",
+      "passed": true
+    },
+    {
+      "command": "fusion documents create",
+      "passed": true
+    },
+    {
+      "command": "fusion documents inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion documents create",
+      "passed": true
+    },
+    {
+      "command": "fusion documents activate",
+      "passed": true
+    },
+    {
+      "command": "fusion documents export",
+      "passed": true
+    },
+    {
+      "command": "fusion documents close",
+      "passed": true
+    },
+    {
+      "command": "fusion documents import",
+      "passed": true
+    },
+    {
+      "command": "fusion documents inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion documents close",
+      "passed": true
+    },
+    {
+      "command": "fusion projects create",
+      "passed": true
+    },
+    {
+      "command": "fusion projects inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion projects rename",
+      "passed": true
+    },
+    {
+      "command": "fusion projects delete",
+      "passed": true,
+      "blocker_matched": true,
+      "outcome": "capability_blocked"
+    },
+    {
+      "command": "fusion folders create",
+      "passed": true
+    },
+    {
+      "command": "fusion folders create",
+      "passed": true
+    },
+    {
+      "command": "fusion folders inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion folders rename",
+      "passed": true
+    },
+    {
+      "command": "fusion folders list",
+      "passed": true
+    },
+    {
+      "command": "fusion folders search",
+      "passed": true
+    },
+    {
+      "command": "fusion files upload",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs list",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs cancel",
+      "passed": true
+    },
+    {
+      "command": "fusion app jobs forget",
+      "passed": true
+    },
+    {
+      "command": "fusion files list",
+      "passed": true
+    },
+    {
+      "command": "fusion files search",
+      "passed": true
+    },
+    {
+      "command": "fusion files inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion files rename",
+      "passed": true
+    },
+    {
+      "command": "fusion files move",
+      "passed": true
+    },
+    {
+      "command": "fusion files download",
+      "passed": true
+    },
+    {
+      "command": "fusion files copy",
+      "passed": true
+    },
+    {
+      "command": "fusion documents activate",
+      "passed": true
+    },
+    {
+      "command": "fusion documents save-as",
+      "passed": true
+    },
+    {
+      "command": "fusion documents save",
+      "passed": true
+    },
+    {
+      "command": "fusion documents close",
+      "passed": true
+    },
+    {
+      "command": "fusion documents open",
+      "passed": true
+    },
+    {
+      "command": "fusion documents close",
+      "passed": true
+    },
+    {
+      "command": "fusion files delete",
+      "passed": true
+    },
+    {
+      "command": "fusion files delete",
+      "passed": true
+    },
+    {
+      "command": "fusion files delete",
+      "passed": true
+    },
+    {
+      "command": "fusion folders delete",
+      "passed": true
+    },
+    {
+      "command": "fusion folders delete",
+      "passed": true
+    }
+  ],
+  "raw_report_sha256": "1fad88b6f3f42b402f6f9ba588a928fe1b74b6a4326e3d15fa3bcdd06c4e3908"
+}

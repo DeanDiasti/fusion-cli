@@ -1,0 +1,113 @@
+{
+  "passed": true,
+  "duration_seconds": 1.0,
+  "original_document_restored": true,
+  "original_workspace_restored": true,
+  "build": "41b3c0f4c7e81a3a",
+  "transport": "installed HTTP CLI dispatch",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion app inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion documents import",
+      "passed": true
+    },
+    {
+      "command": "fusion workspace activate",
+      "passed": true
+    },
+    {
+      "command": "fusion animation storyboards list",
+      "passed": true
+    },
+    {
+      "command": "fusion animation storyboards activate",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback seek",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback play",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion documents close",
+      "passed": true
+    },
+    {
+      "command": "fusion documents activate",
+      "passed": true
+    },
+    {
+      "command": "fusion workspace activate",
+      "passed": true
+    },
+    {
+      "command": "fusion app inspect",
+      "passed": true
+    }
+  ],
+  "raw_report_sha256": "041455f07ca1b4fd9217a9296915c845acbf1edb305250ec5afc2d325a5a0305"
+}

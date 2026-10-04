@@ -1,0 +1,39 @@
+name: Bug report
+description: Report a reproducible CLI, chat, or CAD behavior problem.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: "Use synthetic data. Remove tokens, account/cloud IDs, personal paths and private designs. Report vulnerabilities through Security → Report a vulnerability."
+  - type: input
+    id: version
+    attributes:
+      label: CadBot version and build
+      description: Copy the non-sensitive version/build from fusion doctor.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Platform and Fusion version
+      placeholder: macOS version, Fusion version, external Python version
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Include the command or chat request and minimal synthetic fixture.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Redacted diagnostics
+      description: Include error text and geometry/rollback observations if available.

@@ -1,0 +1,13 @@
+{
+  "autodeskProduct": "Fusion360",
+  "type": "addin",
+  "id": "7f3c2a91-5d4e-4b6a-9c8f-1e2d3a4b5c6d",
+  "version": "0.5.0",
+  "name": "CadBot",
+  "description": {
+    "": "AI CAD agent — natural language to parametric features, powered by your OpenAI Codex subscription."
+  },
+  "author": "Dean Diasti",
+  "runOnStartup": false,
+  "supportedOS": "windows|mac"
+}

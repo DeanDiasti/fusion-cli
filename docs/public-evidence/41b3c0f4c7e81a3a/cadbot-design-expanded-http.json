@@ -1,0 +1,326 @@
+{
+  "passed": true,
+  "build": "41b3c0f4c7e81a3a",
+  "transport": "installed HTTP CLI dispatch",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion app inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion documents create",
+      "passed": true
+    },
+    {
+      "command": "fusion workspace activate",
+      "passed": true
+    },
+    {
+      "command": "fusion design capabilities",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches lines add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches geometry construction",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches geometry construction",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches constraints add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches constraints list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches constraints delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches circles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches circles edit",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches geometry list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches rectangles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design features list",
+      "passed": true
+    },
+    {
+      "command": "fusion design features inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design features rename",
+      "passed": true
+    },
+    {
+      "command": "fusion design features suppress",
+      "passed": true
+    },
+    {
+      "command": "fusion design features unsuppress",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies list",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies rename",
+      "passed": true
+    },
+    {
+      "command": "fusion design parameters create",
+      "passed": true
+    },
+    {
+      "command": "fusion design parameters delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction planes create-offset",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction set-parameter",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction hide",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction show",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design selection add",
+      "passed": true
+    },
+    {
+      "command": "fusion design selection clear",
+      "passed": true
+    },
+    {
+      "command": "fusion design solid-features capabilities",
+      "passed": true
+    },
+    {
+      "command": "fusion design solid-features list",
+      "passed": true
+    },
+    {
+      "command": "fusion design mirrors create",
+      "passed": true
+    },
+    {
+      "command": "fusion design solid-features inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design solid-features delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design components create",
+      "passed": true
+    },
+    {
+      "command": "fusion design components create",
+      "passed": true
+    },
+    {
+      "command": "fusion design occurrences inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design occurrences ground",
+      "passed": true
+    },
+    {
+      "command": "fusion design occurrences unground",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints create",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints limits set",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints limits clear",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints lock",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints unlock",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design sheet-metal flat-pattern inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design occurrences delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design occurrences delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design surfaces list",
+      "passed": true
+    },
+    {
+      "command": "fusion design meshes list",
+      "passed": true
+    },
+    {
+      "command": "fusion design meshes create-triangles",
+      "passed": true
+    },
+    {
+      "command": "fusion design meshes inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design meshes edit",
+      "passed": true
+    },
+    {
+      "command": "fusion design meshes delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design forms list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sheet-metal capabilities",
+      "passed": true
+    },
+    {
+      "command": "fusion design sheet-metal inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design sheet-metal features list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sheet-metal rules list",
+      "passed": true
+    },
+    {
+      "command": "fusion design materials libraries",
+      "passed": true
+    },
+    {
+      "command": "fusion design materials list",
+      "passed": true
+    },
+    {
+      "command": "fusion design configurations list",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline list",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline groups create",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline groups inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline groups collapse",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline groups expand",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline groups delete-keep",
+      "passed": true
+    },
+    {
+      "command": "fusion design diagnostics",
+      "passed": true
+    },
+    {
+      "command": "fusion documents close",
+      "passed": true
+    },
+    {
+      "command": "fusion documents activate",
+      "passed": true
+    },
+    {
+      "command": "fusion workspace activate",
+      "passed": true
+    }
+  ],
+  "raw_report_sha256": "2e9ba9f3d05c584ab433bb7513cf38c3d50d3272068f8575884932c266eb18b8"
+}

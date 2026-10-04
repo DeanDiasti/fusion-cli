@@ -1,0 +1,118 @@
+{
+  "passed": true,
+  "original_document_restored": true,
+  "original_workspace_restored": true,
+  "build": "41b3c0f4c7e81a3a",
+  "transport": "native source CLI dispatch",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion animation authoring capabilities",
+      "passed": true
+    },
+    {
+      "command": "fusion animation settings inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion animation settings recording-mode",
+      "passed": true
+    },
+    {
+      "command": "fusion animation settings recording-mode",
+      "passed": true
+    },
+    {
+      "command": "fusion animation settings recording-mode",
+      "passed": true
+    },
+    {
+      "command": "fusion animation settings watermark",
+      "passed": true
+    },
+    {
+      "command": "fusion animation settings watermark",
+      "passed": true
+    },
+    {
+      "command": "fusion animation storyboards list",
+      "passed": true
+    },
+    {
+      "command": "fusion animation storyboards create",
+      "passed": true
+    },
+    {
+      "command": "fusion animation storyboards activate",
+      "passed": true
+    },
+    {
+      "command": "fusion animation storyboards copy",
+      "passed": true
+    },
+    {
+      "command": "fusion animation storyboards move",
+      "passed": true
+    },
+    {
+      "command": "fusion animation storyboards reverse",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback seek",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback status",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback full-screen",
+      "passed": true
+    },
+    {
+      "command": "fusion animation playback full-screen",
+      "passed": true
+    },
+    {
+      "command": "fusion animation camera recording",
+      "passed": true
+    },
+    {
+      "command": "fusion animation camera recording",
+      "passed": true
+    },
+    {
+      "command": "fusion animation components list",
+      "passed": true
+    },
+    {
+      "command": "fusion animation components inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion animation camera inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion animation storyboards activate",
+      "passed": true
+    },
+    {
+      "command": "fusion animation actions rotate",
+      "passed": true
+    },
+    {
+      "command": "fusion animation actions rotate",
+      "passed": true,
+      "blocker_matched": true,
+      "outcome": "capability_blocked"
+    },
+    {
+      "command": "fusion animation storyboards delete",
+      "passed": true
+    }
+  ],
+  "raw_report_sha256": "0c665871c8c2dfd4f6c29a5fa7a4ee593b10669702966e51c21c7526a6fc44db"
+}

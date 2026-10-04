@@ -1,0 +1,23 @@
+name: Feature request
+description: Propose a CAD capability or workflow improvement.
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Workflow or problem
+      description: Explain what you are trying to accomplish with synthetic examples.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Suggested command, flags, expected geometry and restoration behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: API references and validation ideas
+      description: Official Fusion API documentation and a disposable test scenario, if known.

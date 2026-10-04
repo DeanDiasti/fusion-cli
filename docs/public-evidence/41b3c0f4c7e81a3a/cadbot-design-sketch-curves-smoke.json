@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "extruded_volume_mm3": 62.83185307179329,
+  "undo_verified": true,
+  "controller_closed": true,
+  "fixture_closed": true,
+  "original_document_restored": true,
+  "original_workspace_restored": true,
+  "selection_restored": true,
+  "build": "41b3c0f4c7e81a3a",
+  "transport": "native CLI with checkpoint transactions",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion design sketches arcs add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches lines add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches circles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches profiles list",
+      "passed": true
+    },
+    {
+      "command": "fusion design features extrude",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches points add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches geometry list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches splines add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches splines add",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches profiles list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches create",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches rectangles add",
+      "passed": true
+    },
+    {
+      "command": "fusion design features revolve",
+      "passed": true
+    }
+  ],
+  "raw_report_sha256": "1e336a51b3e3a7feebcd430db970c3c1896a0cf90e70bb28aba1a82edd4cb2be"
+}

@@ -1,0 +1,38 @@
+# Credentials and machine-local state
+.env
+.env.*
+!.env.example
+.bridge_token
+runtime_config.json
+auth.json
+*.pem
+*.key
+*.log
+.DS_Store
+
+# Python environments and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+node_modules/
+
+# Local agent settings and private validation/investigation records
+.codex/
+.agents/
+docs/release-evidence/
+docs/native-animation-authoring-proof.md
+
+# Historical scratch probes; maintained release fixtures are published
+/tests/*_probe.py
+/tests/fusion_animation_rotation_fixture.py
+/tests/fusion_admin_smoke.py
+/tests/fusion_cloud_smoke.py
+/tests/fusion_commands_smoke.py
+/tests/fusion_motion_smoke.py

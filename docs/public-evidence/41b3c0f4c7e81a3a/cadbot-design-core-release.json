@@ -1,0 +1,274 @@
+{
+  "target_count": 64,
+  "original_model_touched": false,
+  "passed": true,
+  "fixture_closed": true,
+  "original_document_restored": true,
+  "build": "41b3c0f4c7e81a3a",
+  "transport": "native source CLI dispatch",
+  "evidence_format": "public_case_summary_v1",
+  "details_redacted": true,
+  "results": [
+    {
+      "command": "fusion design inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design reset",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches circle",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches line",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches dimension",
+      "passed": true
+    },
+    {
+      "command": "fusion design parameters list",
+      "passed": true
+    },
+    {
+      "command": "fusion design parameters set",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches lines edit",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches geometry fixed",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches geometry fixed",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches dimensions list",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches dimensions set",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches dimensions delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches geometry delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design sketches delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design selection list",
+      "passed": true
+    },
+    {
+      "command": "fusion design selection remove",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies combine",
+      "passed": true
+    },
+    {
+      "command": "fusion design bodies delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design features revolve",
+      "passed": true
+    },
+    {
+      "command": "fusion design features circular-pattern",
+      "passed": true
+    },
+    {
+      "command": "fusion design features rectangular-pattern",
+      "passed": true
+    },
+    {
+      "command": "fusion design features chamfer",
+      "passed": true
+    },
+    {
+      "command": "fusion design features delete-one",
+      "passed": true
+    },
+    {
+      "command": "fusion design features delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design components list",
+      "passed": true
+    },
+    {
+      "command": "fusion design components inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design components rename",
+      "passed": true
+    },
+    {
+      "command": "fusion design occurrences list",
+      "passed": true
+    },
+    {
+      "command": "fusion design occurrences create",
+      "passed": true
+    },
+    {
+      "command": "fusion design occurrences transform",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints edit",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints suppress",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints unsuppress",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints flip",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints unflip",
+      "passed": true
+    },
+    {
+      "command": "fusion design assembly instances",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints list",
+      "passed": true
+    },
+    {
+      "command": "fusion design joints drive",
+      "passed": true
+    },
+    {
+      "command": "fusion design motion check",
+      "passed": true
+    },
+    {
+      "command": "fusion design motion render",
+      "passed": true
+    },
+    {
+      "command": "fusion design motion open",
+      "passed": true
+    },
+    {
+      "command": "fusion design components delete",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction planes create-midplane",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction planes create-three-points",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction planes create-angle",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction axes create-two-points",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction axes create-two-planes",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction axes create-edge",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction points create-on-entity",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction points create-center",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction rename",
+      "passed": true
+    },
+    {
+      "command": "fusion design construction list",
+      "passed": true
+    },
+    {
+      "command": "fusion design holes create",
+      "passed": true
+    },
+    {
+      "command": "fusion design solid-features edit",
+      "passed": true
+    },
+    {
+      "command": "fusion design shells create",
+      "passed": true
+    },
+    {
+      "command": "fusion design drafts create",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline inspect",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline roll",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline beginning",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline end",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline groups list",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline groups rename",
+      "passed": true
+    },
+    {
+      "command": "fusion design timeline groups delete-contents",
+      "passed": true
+    },
+    {
+      "command": "fusion design viewport screenshot",
+      "passed": true
+    }
+  ],
+  "raw_report_sha256": "471e655765d8344281fbf7231be9d52e68379bfa280e994227a67a4292cbec69"
+}
