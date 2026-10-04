@@ -10,6 +10,7 @@ Fork and clone the repository, then create a virtual environment and install
 `requirements.txt`. Python 3.10+ and Node.js are needed for host checks. Autodesk
 Fusion is required only for native gates. The included installation workflow is
 validated on macOS; do not claim Windows support based on mock tests.
+Use Python 3.14+ for the publication guard, which decompresses the Fusion fixture.
 
 ```bash
 python3 -m venv .venv

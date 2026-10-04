@@ -36,6 +36,8 @@ jobs:
       - name: Install pinned SDK
         run: python -m pip install -r requirements.txt
       - name: Publication guard
+        # The native F3D fixture uses ZIP Zstandard, supported by Python 3.14.
+        if: matrix.python == '3.14'
         run: python scripts/check_public.py
       - name: Python host tests (no Fusion or account)
         run: python -m unittest discover -s tests -p 'test_*.py'

@@ -18,6 +18,9 @@ Install `requirements.txt` before running the complete host suite. No Codex sign
 model call, Autodesk account or native Fusion operation is required. GitHub CI
 runs these checks on Linux and macOS. CI uses pinned action revisions, read-only
 repository permissions and no project credentials.
+The publication guard requires Python 3.14+ for ZIP Zstandard entries in the native
+Fusion fixture; CI runs that complete scan on both Python 3.14 jobs. Python 3.10
+also runs host tests and offline CLI checks.
 
 `python scripts/check_release.py` additionally checks the durable public evidence
 and exact source/fixture hashes for the current build. Run this for a release;

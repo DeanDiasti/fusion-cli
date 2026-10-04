@@ -93,8 +93,11 @@ node tests/test_motion_player.cjs
 ```
 
 Host tests use fake Fusion objects and SDK responses, with no CAD application or
-account required. GitHub CI runs them without credentials. Native behavior is
-verified separately: the current release has nine native Fusion gates and six
+account required. GitHub CI runs them without credentials.
+The publication guard needs Python 3.14+ to decompress the native Fusion fixture;
+the external worker and host tests support Python 3.10+.
+
+Native behavior is verified separately: the current release has nine native Fusion gates and six
 installed HTTP gates. [Public evidence](docs/public-evidence/41b3c0f4c7e81a3a/) preserves
 case dispositions and geometry/cleanup assertion summaries; raw account identifiers,
 entity selectors, local paths and tool responses are withheld.

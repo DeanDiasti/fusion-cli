@@ -56,7 +56,7 @@
     "fusion_addin/CadBot/tools/sketch_support.py": "922b850605b8540e17b3d4ac750c557bf1eff36a47f12fffaeab4a095eb6289d",
     "fusion_addin/CadBot/tools/state.py": "82750fd0c47f9434db92df7ec83fc224d3d9c6c5ba005f64882d53b02d915bb4",
     "requirements.txt": "d8f15e39e390d38c94f0090584e24afb9a2b3542881309562664b9c60d59f768",
-    "scripts/check_public.py": "af8412eaa529f5ad2330b34544cd9ba231ed799944b22e4d7579f6de7ba930ab",
+    "scripts/check_public.py": "50ad2a21bbbc6a36d48bf8367a0a08a705ea9f3dc14e7595a106a74f62e08216",
     "scripts/check_release.py": "287b44aabd3ef0a72673cf74953916967f671f19c7623c594d27977db472dec4",
     "scripts/cli_coverage.py": "33d6df67e1db8e3f2c137b3cbc0c89d8a48390754daba6dc7d6ec3ec1d699834",
     "scripts/fusion": "300b67e54e244050e1f8e39b5d156cf30aa3833793c2c2bd159f90ca02f9ecb6",

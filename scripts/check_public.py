@@ -3,6 +3,7 @@
 
 Reports paths and marker categories, never the matched values. This check is a
 publication guard, not a guarantee that every possible secret can be recognized.
+Use Python 3.14+ to scan native Fusion archives containing ZIP Zstandard entries.
 """
 import argparse
 from pathlib import Path
@@ -51,10 +52,15 @@ def main():
         data = path.read_bytes()
         for marker in scan_bytes(data):failures.append((str(relative), marker))
         if path.suffix == '.f3d':
-            with zipfile.ZipFile(path) as archive:
-                for name in archive.namelist():
-                    for marker in scan_bytes(archive.read(name)):
-                        failures.append((str(relative) + '!' + name, marker))
+            try:
+                with zipfile.ZipFile(path) as archive:
+                    for name in archive.namelist():
+                        for marker in scan_bytes(archive.read(name)):
+                            failures.append((str(relative) + '!' + name, marker))
+            except NotImplementedError:
+                failures.append((str(relative), 'archive compression unsupported; rerun with Python 3.14+'))
+            except (zipfile.BadZipFile, RuntimeError):
+                failures.append((str(relative), 'archive unreadable; contents were not scanned'))
     if failures:
         for path, marker in failures:print(path + ': ' + marker, file=sys.stderr)
         return 1
